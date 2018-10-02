@@ -8,23 +8,23 @@ import Contacts from './Contacts.jsx';
 
 const Router = (props) => {
   if(props.screen === 'Home'){
-    return <Home/>
+    return <Home status={props.status} />
   }
   if(props.screen === 'Reports'){
-    return <Reports/>
+    return <Reports report={props.admin.Reports} />
   }
   if(props.screen === 'Resources'){
-    return <Resources/>
+    return <Resources status={props.status} />
   }
   if(props.screen === 'Accounts'){
-    return <Accounts/>
+    return <Accounts status={props.status} />
   }
   if(props.screen === 'Tasks'){
-    return <Tasks/>
+    return <Tasks status={props.status} adminTasks={props.admin.Tasks} staffTasks={props.staff.Tasks} />
   }
   if(props.screen === 'Contacts'){
-    return <Contacts/>
-  }
+    return <Contacts status={props.status} />
+  } 
   // if(props.screen === 'Chat'){
   //   return <Chat/>
   // }

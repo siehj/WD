@@ -7,7 +7,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false,
+      loggedIn: true,
       username: '',
       password: '',
       empStatus: 'Admin' // Admin or Staff
@@ -43,9 +43,7 @@ class App extends React.Component {
       <div>
         {this.state.loggedIn ? 
         <Dashboard status={this.state.empStatus} /> 
-        
         :
-
           <div>
             <div id="logo" >
               <h1>Wellness Dental</h1>

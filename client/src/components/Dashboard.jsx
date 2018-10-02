@@ -67,7 +67,7 @@ class Dashboard extends React.Component {
           {/* MAIN PAGE */}
           <div className="container" id="main" >
             <h2>{this.state.currScreen}</h2>
-              <Router screen={this.state.currScreen} status={this.props.status} />
+              <Router screen={this.state.currScreen} status={this.props.status} admin={this.state.adminSidebar} staff={this.state.staffSidebar} />
           </div>
         </div>
 

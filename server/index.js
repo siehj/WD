@@ -1,10 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const io = require('socket.io');
-var http = require('http').Server('index');
-var io = require('socket.io')(http);
-
+const http = require('http');
+const socketIo = require('socket.io');
 const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
+
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,7 +18,7 @@ app.post('/login', (req, res) => {
 })
 
 //Whenever someone connects this gets executed
-io.on('connection', function(socket) {
+io.on('connection', (socket) => {
   console.log('A user connected');
 
   //Whenever someone disconnects this piece of code executed

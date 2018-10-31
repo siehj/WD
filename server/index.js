@@ -1,5 +1,5 @@
 require('dotenv').config();
-import axios from 'axios';
+const axios = require('axios');
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();

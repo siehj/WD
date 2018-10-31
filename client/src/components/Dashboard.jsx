@@ -14,14 +14,14 @@ class Dashboard extends React.Component {
         'Reports': ['Generate', 'Evaluate', 'Graphs'],
         'Tasks': ['Assign', 'Board'],
         'Resources': ['Power Points', 'Employee Resources', 'Office Resources'],
-        'Accounts': [],
+        'Accounts': ['Audit', 'A/R', 'Billing'],
         'Contacts': [], //Create New, Search
       },
       // Sidebar options for Staff
       staffSidebar: {
         'Home': [],
         'Tasks': ['Board'],
-        'Resources': ['Power Points', 'Employee Resources', 'Office Resources'],
+        'Resources': ['Tutorials', 'Employee Resources', 'Office Resources'],
         'Contacts': [],
       },
     }

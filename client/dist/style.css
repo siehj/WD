@@ -92,3 +92,7 @@ h3 {
   color: #47748b;
   width: 74.5%;
 }
+
+.tabs {
+  cursor: pointer;
+}

@@ -17,7 +17,7 @@ const Router = (props) => {
     return <Resources status={props.status} />
   }
   if(props.screen === 'Accounts'){
-    return <Accounts status={props.status} />
+    return <Accounts status={props.status} accounts={props.admin.Accounts} />
   }
   if(props.screen === 'Tasks'){
     return <Tasks status={props.status} adminTasks={props.admin.Tasks} staffTasks={props.staff.Tasks} />

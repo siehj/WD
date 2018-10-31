@@ -1,18 +1,33 @@
 import React from 'react';
-import socketIOClient from 'socket.io-client';
-// const io = socketIo(server);
+import io from 'socket.io-client';
 
-const Chat = (props) => {
+
+class Chat extends React.Component { 
+  constructor(props) {
+    super(props);
+    this.state = {};
+    
+
+  }
+  componentDidMount() {
+    // let socket = io.connect();
+
+    // socket.on('connect', () => {
+    //   console.log('connection made client side');
+    // });
+  }
   // socket = io();
-  return (
-    <div>
-      {/* <label className="text-center" >Chat</label> */}
-      <div id="Chat">
-        
+  render() {
+    return (
+      <div>
+        {/* <label className="text-center" >Chat</label> */}
+        <div id="Chat">
+          
+        </div>
+        <input type="text" name="chat" id="chatInput"/><button type="button" >Enter</button>
       </div>
-      <input type="text" name="chat" id="chatInput"/><button type="button" >Enter</button>
-    </div>
-  )
+    )
+  }
 }
 
 export default Chat; 

@@ -1,8 +1,10 @@
-const express = require('express');
+require('dotenv').config();
+import axios from 'axios';
 const bodyParser = require('body-parser');
+const express = require('express');
+const app = express();
 const http = require('http');
 const socketIo = require('socket.io');
-const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
@@ -19,7 +21,7 @@ app.post('/login', (req, res) => {
 
 //Whenever someone connects this gets executed
 io.on('connection', (socket) => {
-  console.log('A user connected');
+  console.log('A user connected', socket.id);
 
   //Whenever someone disconnects this piece of code executed
   socket.on('disconnect', function () {

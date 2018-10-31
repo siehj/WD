@@ -62,7 +62,7 @@ class Dashboard extends React.Component {
                 })
               }
             </ul>
-            <Chat />
+            {/* <Chat /> */}
           </nav>
           {/* MAIN PAGE */}
           <div className="container" id="main" >

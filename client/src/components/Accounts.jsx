@@ -1,13 +1,16 @@
 import React from 'react';
-import AccountAuditTool from './AccountComponents/AcctAudit.jsx';
 import { Container, Row, Col } from 'reactstrap';
+import ARTool from './AccountComponents/AgingReportTool.jsx';
+import BillingTool from './AccountComponents/BillingTool.jsx';
+import AccountAuditTool from './AccountComponents/AcctAudit.jsx';
 
 class Accounts extends React.Component {
   constructor(props) {
     super(props); 
     this.state = {
       miniScreen : 'Audit',
-      index: 0
+      index: 0,
+      agingReportData: []
     };
     this.changeMiniScreen = this.changeMiniScreen.bind(this);
   }
@@ -34,7 +37,8 @@ class Accounts extends React.Component {
           </Row>
         </Container>
         <div className="miniMain" >
-          {this.state.miniScreen === 'Audit' ? <AccountAuditTool/> : null}
+          {this.state.miniScreen === 'Audit' ? <AccountAuditTool/> : 
+          this.state.miniScreen === 'A/R' ? <ARTool/> : <BillingTool/> }
         </div>
       </div>
     )

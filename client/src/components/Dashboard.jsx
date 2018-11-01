@@ -12,7 +12,7 @@ class Dashboard extends React.Component {
       // Sidebar options for admins
       adminSidebar: {
         'Home': [],
-        'Reports': ['Graphs', 'Audit', 'Generate',  ],
+        'Reports': ['Graphs', 'Input', 'Generate',  ],
         'Tasks': ['Assign', 'Board'],
         'Resources': ['Power Points', 'Employee Resources', 'Office Resources'],
         'Accounts': ['Audit', 'A/R', 'Billing'],
@@ -35,7 +35,7 @@ class Dashboard extends React.Component {
   }
 
   openNav() {
-    document.getElementById("sidebar").style.width = '35%';
+    document.getElementById("sidebar").style.width = '40%';
     // document.getElementById("main").style.marginLeft = '30%';    
     this.setState({ navOpen: true });
   }

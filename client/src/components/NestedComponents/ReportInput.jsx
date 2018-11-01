@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Audit = (props) => {
+const ReportInput = (props) => {
   return (
     <div className="container" >
     
@@ -9,4 +9,4 @@ const Audit = (props) => {
   )
 }
 
-export default Audit;
+export default ReportInput;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Audit from './NestedComponents/AcctAudit.jsx';
+import AccountAuditTool from './NestedComponents/ReportAcctAudit.jsx';
 
 class Accounts extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class Accounts extends React.Component {
             })
           }
         </ul>
-          {this.state.miniScreen === 'Audit' ? <Audit/> : ('')}
+          {this.state.miniScreen === 'Audit' ? <AccountAuditTool/> : null}
       </div>
     )
   }

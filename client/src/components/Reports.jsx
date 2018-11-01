@@ -1,6 +1,6 @@
 import React from 'react';
 import Generator from './NestedComponents/ReportGen.jsx';
-import AccountAuditTool from './NestedComponents/ReportAcctAudit.jsx';
+import ReportInput from './NestedComponents/ReportInput.jsx';
 import ReportGraphs from './NestedComponents/ReportGraph.jsx';
 
 class Reports extends React.Component {
@@ -27,7 +27,7 @@ class Reports extends React.Component {
         </ul>
 
         {/* Displayed mini screen */}
-        {this.state.miniScreen === "Audit" ? <AccountAuditTool/> : 
+        {this.state.miniScreen === "Input" ? <ReportInput/> : 
         this.state.miniScreen === "Generate" ? <Generator/> : <ReportGraphs/> 
       }
       </div>

@@ -16,6 +16,8 @@ h2 {
   font-size: 40px;
   font-family: 'Parisienne';  
   margin-bottom: 10px;
+  /* padding-top: 30px;
+  padding-bottom: 30px; */
 }
 
 h3 {
@@ -24,14 +26,14 @@ h3 {
   margin-left: 30px;
 }
 
-/* .wrapper {
+.wrapper {
   display: flex;
   width: 100%;
-  align-items: stretch;
-} */
+  /* align-items: stretch; */
+}
 
 #sidebar {
-  width: 30%;
+  width: 40%;
   min-height: 100vh;
   /* background: rgb(145, 145, 145); */
   /* background-color: #47748b; */
@@ -47,14 +49,16 @@ h3 {
 
 #sidebar a {
   color: #fff;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   cursor: pointer;
 }
 
 #sidebar ul.components {
-  padding: 20px 0;
+  /* padding: 20px 0; */
   /* background-color: #50829b; */
-  background-color: #646464;
+  /* background-color: #646464; */
+  background-color: #4c4d4c;
+
   border-bottom: 1px solid #fff;
   border-top: 1px solid #fff;
 
@@ -67,13 +71,14 @@ h3 {
 
 #sidebar ul li a {
   padding: 10px;
-  font-size: 1.1em;
+  font-size: 1em;
   display: block;
 }
-/* #sidebar ul li a:hover { */
-  /* color: #7386D5;
-  background: #fff; */
-/* } */
+#sidebar ul li a:hover {
+  /* color: #7386D5; */
+  background-color: #646464;
+  /* background: #fff;  */
+ }
 
 /* ul ul a {
   font-size: 0.9em !important;

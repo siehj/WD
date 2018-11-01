@@ -11,7 +11,7 @@ class Dashboard extends React.Component {
       // Sidebar options for admins
       adminSidebar: {
         'Home': [],
-        'Reports': ['Generate', 'Evaluate', 'Graphs'],
+        'Reports': ['Graphs', 'Audit', 'Generate',  ],
         'Tasks': ['Assign', 'Board'],
         'Resources': ['Power Points', 'Employee Resources', 'Office Resources'],
         'Accounts': ['Audit', 'A/R', 'Billing'],

@@ -1,7 +1,7 @@
 import React from 'react';
-import Generator from './NestedComponents/ReportGen.jsx';
-import ReportInput from './NestedComponents/ReportInput.jsx';
-import ReportGraphs from './NestedComponents/ReportGraph.jsx';
+import Generator from './ReportComponents/ReportGen.jsx';
+import ReportInput from './ReportComponents/ReportInput.jsx';
+import ReportGraphs from './ReportComponents/ReportGraph.jsx';
 import { Container, Row, Col } from 'reactstrap';
 
 class Reports extends React.Component {

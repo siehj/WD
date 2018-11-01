@@ -29,6 +29,10 @@ h3 {
   margin-left: 30px;
 }
 
+.mainScreens {
+  padding-top: 10px;
+}
+
 .wrapper {
   display: flex;
   width: 100%;
@@ -36,7 +40,7 @@ h3 {
 }
 
 #sidebar {
-  width: 40%;
+  width: 32%;
   min-height: 100vh;
   /* background: rgb(145, 145, 145); */
   /* background-color: #47748b; */
@@ -46,7 +50,8 @@ h3 {
 }
 
 #sidebar .sidebar-header {
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   /* background: #6d7fcc; */
 }
 
@@ -116,8 +121,8 @@ h3 {
 }
 
 .icon {
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   margin-right: 10px;
   cursor: pointer;
 }
@@ -133,4 +138,8 @@ h3 {
   margin-top: 40px;
   padding-top: 3px;
   padding-bottom: 5px;
+}
+
+.miniMain {
+  padding-top: 10px;
 }

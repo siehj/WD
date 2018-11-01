@@ -35,7 +35,7 @@ class Dashboard extends React.Component {
   }
 
   openNav() {
-    document.getElementById("sidebar").style.width = '40%';
+    document.getElementById("sidebar").style.width = '32%';
     // document.getElementById("main").style.marginLeft = '30%';    
     this.setState({ navOpen: true });
   }

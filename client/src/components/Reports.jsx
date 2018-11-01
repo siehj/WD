@@ -17,23 +17,28 @@ class Reports extends React.Component {
     this.setState({ index: e.target.target });
     this.setState({ miniScreen: e.target.title });
   }
-
+  
   render() {
+    console.log(this.state.index);
     return (
       <div >
         <Container>
           <Row className="nav nav-tabs">
-          <Col>
+          <Col className="text-center" >
             {
-              this.props.report.map((rep, i) => { return <a className="option" target={i} key={rep} onClick={this.changeMiniScreen} title={rep}>{rep}</a> })
+              this.props.report.map((rep, i) => { 
+                return <a className="option" target={i} key={rep} onClick={this.changeMiniScreen} title={rep} style={{ fontWeight: Number(this.state.index) === i ? 'bold' : null }} >{rep}</a> })
             }
           </Col>
           </Row>
         </Container>    
+
         {/* Displayed mini screen */}
-        {this.state.miniScreen === "Input" ? <ReportInput/> : 
-        this.state.miniScreen === "Generate" ? <Generator/> : <ReportGraphs/> 
-      }
+        <div className="miniMain" >
+          {this.state.miniScreen === "Input" ? <ReportInput/> : 
+          this.state.miniScreen === "Generate" ? <Generator/> : <ReportGraphs/> 
+          }
+        </div>
       </div>
     )
   }

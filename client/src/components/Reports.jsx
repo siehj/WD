@@ -2,6 +2,7 @@ import React from 'react';
 import Generator from './NestedComponents/ReportGen.jsx';
 import ReportInput from './NestedComponents/ReportInput.jsx';
 import ReportGraphs from './NestedComponents/ReportGraph.jsx';
+import { Container, Row, Col } from 'reactstrap';
 
 class Reports extends React.Component {
   constructor(props) {
@@ -20,12 +21,15 @@ class Reports extends React.Component {
   render() {
     return (
       <div >
-        <ul className="nav nav-tabs">
-          {
-            this.props.report.map((rep, i) => { return <li key={rep} onClick={this.changeMiniScreen} ><a target={i} title={rep}>{rep}</a></li> })
-          }
-        </ul>
-
+        <Container>
+          <Row className="nav nav-tabs">
+          <Col>
+            {
+              this.props.report.map((rep, i) => { return <a className="option" target={i} key={rep} onClick={this.changeMiniScreen} title={rep}>{rep}</a> })
+            }
+          </Col>
+          </Row>
+        </Container>    
         {/* Displayed mini screen */}
         {this.state.miniScreen === "Input" ? <ReportInput/> : 
         this.state.miniScreen === "Generate" ? <Generator/> : <ReportGraphs/> 

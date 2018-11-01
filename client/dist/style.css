@@ -107,10 +107,22 @@ h3 {
 .tabs {
   cursor: pointer;
 }
+.option {
+  cursor: pointer;
+  padding: 10px;  
+}
 
 .icon {
   height: 30px;
   width: 30px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.navControllIcon {
+  height: 30px;
+  width: 30px;
+  margin-top: 15px;
   cursor: pointer;
 }
 

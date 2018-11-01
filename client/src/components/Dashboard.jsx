@@ -12,7 +12,7 @@ class Dashboard extends React.Component {
       // Sidebar options for admins
       adminSidebar: {
         'Home': [],
-        'Reports': ['Graphs', 'Input', 'Generate',  ],
+        'Reports': ['Graphs', 'Input', 'Generate',],
         'Tasks': ['Assign', 'Board'],
         'Resources': ['Power Points', 'Employee Resources', 'Office Resources'],
         'Accounts': ['Audit', 'A/R', 'Billing'],
@@ -31,7 +31,7 @@ class Dashboard extends React.Component {
   }
 
   changeScreen(e) {
-    this.setState({ currScreen : `${e.target.name}` });
+    this.setState({ currScreen: `${e.target.name}` });
   }
 
   openNav() {
@@ -42,7 +42,7 @@ class Dashboard extends React.Component {
 
   closeNav() {
     document.getElementById("sidebar").style.width = '0px';
-    document.getElementById("main").style.marginLeft = '0px';    
+    document.getElementById("main").style.marginLeft = '0px';
     this.setState({ navOpen: false });
   }
 
@@ -51,55 +51,70 @@ class Dashboard extends React.Component {
       <div id="dashboard"  >
         <div className="wrapper" >
           <nav id="sidebar" >
+          {this.state.navOpen ?
+          <div>
             <div className="sidebar-header text-center" >
-            {/* <a onClick={this.closeNav.bind(this)} >X</a> */}
+              {/* <a onClick={this.closeNav.bind(this)} >X</a> */}
               <h2>Wellness Dental</h2>
             </div>
             <ul className="list-unstyled components">
               {this.props.status === 'Admin' ?
                 Object.keys(this.state.adminSidebar).map((option, i) => {
-                  if(option !== this.state.currScreen){
+                  if (option !== this.state.currScreen) {
                     return (
                       <li key={i} >
-                      <a className="text-center" name={option} style={{ fontSize : '18px' }} onClick={this.changeScreen.bind(this)} >{option}</a>
-                    </li>
+                        <a className="text-center" name={option} style={{ fontSize: '18px' }} onClick={this.changeScreen.bind(this)} >{option}</a>
+                      </li>
                     )
                   }
                 })
                 :
                 Object.keys(this.state.staffSidebar).map((option, i) => {
-                  if(option !== this.state.currScreen){
+                  if (option !== this.state.currScreen) {
                     return (
                       <li key={i} >
-                      <a className="text-center" name={option} style={{ fontSize : '18px' }} onClick={this.changeScreen.bind(this)} >{option}</a>
-                    </li>
+                        <a className="text-center" name={option} style={{ fontSize: '18px' }} onClick={this.changeScreen.bind(this)} >{option}</a>
+                      </li>
                     )
                   }
                 })
               }
             </ul>
-            {/* <Chat /> */}
+            
             <Container>
-          <Row>
-            <Col className="navIcons text-center">
-            <a className="icon" ><img className="icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAT8SURBVGhD7ZlriBVlHMZXVw2vmaKRRYKJ+WUpS9oPBYaGdgFZjfLyQSwqCk3JRaKCsP2gUkJmYGoRJYqoXRDE0gjzkxLdyCT8IN7vZbmVrWZ7/D3jc/Y4zc6ec3Znzg60P3h4Z573P//3/845Z2bOO1VddNFF+uRyue7Nzc13oGfRGvQF2o9OoXPWYfQ9+oT4pbRT0I1O0blQyL1oFTpJcSHw/kGawDF0Bp13Vwt4Yg9aiCo7KcbX2Z+JfrhaTlDQ32grehlNQMOxq31IC/h9UQ2agZajvVczBDkuonXodoenB+Pdx0DXTmAnUlF9HVI2HDsSNaATzqlPchWbAx2SHCS+Dq1A/3qwz9Fd7k4E0vYip35jxz3GcfSQuzsOyYahPU6u7/tkd6UCw/RjjOCkWa/idXN3+yDJbeigJ6FPYbC7UoexJqFfPPZqmu7uKg8OvgUddaJ3aCI/3rRhzBGMnT+RK22XDsfp4/3RCd6i6dhH2wEYXyc0P5mFtkuDA97zgVtoKv5J/BfqqKGO32l1Rau13TYEPuhJHKJJ/hLYTqhnhuvaT9PTdusQUE3gTz5gou3MQE2furb5tlqHgMcd+JmtTEFdunleQrp59rIdhc6vNBG431bmYBIbVCDtTFth6NCNT+yzlUmob5wnstVWGDqecsASW5mEEvU7PosuoN62C2DmL7kTbGUWatzsWu+xVQBztzuH2GoT4m5CA7wbCzE3k7afd2Mh5lbUx7ttQk49f6nWJ2wVwDyImrzbJsQtdqILNHW2I9C/xnHn0XjbIejuRp/+NSpOz1Z3uysWYmY7/iVbBTB/RWe8GwvH9yEueJwXbH/trhD4+nPVAvutXtLxxzgkgP217oqFsDrHRn/PmCdQo3dj4Xj92E4rkWD7Y3eFwO+P/nCY4la7KwS+rpYXHaa4xe6KhZj8/a7BVgHMfUGmXK6HrViIrUXb0Fo0zHYEcj1A/w6kBYlBtiPQp4UIxa3gmKK/J+KeU6G09bYKYG5zZ/r/mTsINS53rVNsFcBscOcsW5mFGne51pG2CmDmn3qL/tg6E+obhPS8ddhWGObQk07dMRtRu1dF0oY6n/EJf9tWFHU6aI6tTEFpuucEy1G0Y2xHoXM40kKZlmKizzGdDDVN8yR22oqHoPyn8oatTEA9A5DWj0Xxv7vM4XoCdYDWlMbZ7nSo5UOf4PdtFYd43cguIy0+Ry9xFYYaFngSB1B/26XBAfm75wGaEbYrDmPPpobLtFpFqbFdHhy8CGkyes8x1nbFYMx6JP5CrT49lwwJ9O5C6NXBfOaV+mIdYwxkrI0+iXrwTGYNgUR1JPzNidfbThzS6z4xDQUvjmh/phnt7mQg4Z1OvttWYpC2Guk/xjceQ1dMrcgn/4RB0vEe5F1bIegq+vh/LcTrzVctrd4nHlFuwfaX8h2WPCRf5oGetNUCnp4IjiAtZ26ifQVpVeYx2onoYW/PQ28ivSxtVD7BttZ0P0Lp3rcYS/8KT6Imtm+wHYCnF6KnXNAltaVArB5Qt6Cn0VCnSxcGetTjf2BLk9OVZRkKiqfV64ceaDTS2X+BdhGtXnq+jl5Dz6NHUOVvsiqOgfci3elHoaHoRXSWPk2gCc11eHahyHoXrFWWb5HusgFsf4cqfqMsG4rUJ/Cn6w7QRNB2NJXd9r3XqzQUO51ilyJ91+civaAs76Gti/8lVVVXACYnu90t0RkcAAAAAElFTkSuQmCC"/></a>
-            {/* <a>2</a> */}
-            {/* <a>3</a> */}
-            </Col>
-          </Row>
-          <Row >
-            <Col><Button className="logoutBtn" outline color="success" size="block lg" >Logout</Button></Col>
-          </Row>
-        </Container>
+              <Row>
+                <Col className="navIcons text-center">
+                  <a><img className="icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAN4SURBVGhD7ZpNSBRhHMZXLa2QwAq69Q0dokOJdKwkJREvUociIQIjhA4GQUZQUEHYKVKhQx9IhZRI1CUKCuoiiBGdiki0DwMp+hSLSvu9+z7uMM2uM2u7s7OwP3h4Z97/1zPr7uqsGytQoED2mZycLJuamtrC2oZuokE0hn6xH4fj72gEPUQX0D60Vi1yB96KMVKPetBXazd9qH2OTqOVah0OzC5laAsaslYyA/3+oDtoo0ZlD4bUoZeanRXob7iGlmps5qB/OY0v21HhwLwPaIcs/D80W42eqX+oMNdwlsMS2ZkdNFmH3tu2uQMP11nmyFZ6ULwGjdlWuQcvV1mKZC8YFFRQmNUX9WzA0ylZDAYFPaqNFPgybJXNmSF/py2LJlzICMsC2U0OSWXolS2JLng8JsvJIaFZuZEGn59YymXbCwlPbWr0wesB2XZDYL1y8gL8PpZ1N8SO2JT8gAv5jRbJvgObfcrJG/BcI/sObL5QPBDkj6IvOk0JOW/RN52mhJzXaFyngSC/VfYd2P9sw/7Q4KipYZ2PbmnbA7Fm5S1ED7Ttgn1Do8njdAnHgzbiD7ntps6FYr5QbB61YpUZk1U24ob9YaXE4bxOIRfsP1FKHM6bFPKF3C6VObD5Q/EZIc+8yBI3PRw3KuSCfXP7m3iv53h/PPAP5L1jKVWa6ddmI/6Qe15lDmwG/nOd3H5k7habkDGSFGL3US1qRh+17YFYH6pBB5Hv62kack/KvgOb/YrnE3tl34EL6VQwn6iUfQcuZLeCeQF+zVPVewtMwLxFTti06IPXbln3QvyGTYs+XMhm2fZCvNKmRRsuwvW7Jykk3VZ+lNkmu6khaRkXE/i9PGzw1iur/pAcyTtFfJk/VBfLZjAo6FJ9JMDPONoke8GhtoTCXtsmt+DjJ2qQtfShRwm6Eu+WI7iACVQvS7OHXkU0OmQeFds6PJg5hDbISmagYa36hwLzLrFUaHzmoPF2OyK7MGcAVWts5qH5Oc3KOPQ23EMNnKb3iXs60HweQ0bjUzME/cyL+BE6zOkqjcouDPP9BUnOXZYVrNWoheMzrJ2oG11EHeg42oPMff5ctQ8HBpr/H75hTQoxQweHifvuSILJdmvZC7Fh5P2QLGpgsgolvr0wDXsDLOZTkWj/FKbBcCsyX7cwT50TrLvQcoULFEhJLPYX9MB1kryBNa4AAAAASUVORK5CYII=" /></a>
+                  <a><img className="icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAORSURBVGhD7ZrNS1RRGMZNK8xNggWtqk0t+tj0sYnINhW5CBd9GQS1Ecmg/AOSCPqAslZGupCijauoICNrEW6LglwkhEhlFlQWCWqUM/3OPQ/drqM2c8+5dzL8wcO5c973PO97ZuY6d+5YMsf/SiaTWYGOovZsNvuYcQh94zjL+BMNoz50G51DOwlVaHlxoZkq1ISemYYLhXWjqBPt5uE82aYHRZdQvAWNBB15AK9edIDD5DdkilCsAQ0H1RMA7x60ViX9g/lS9ED1EoU6Y+i4SvvDPEPoreqkBjVvMCxQG25gthl9ttbpQ+17DOVqJx6YrEeJnQ/5Qg93GMrUVmGw2JwTzm8nPMz7PaOHscHiilrLH9aZv073rUU8WP8G7eCwDC3m+EwQiAnrzZNRqxbzgzUNdnl88Ngiu98wfd1G44HnJ1Qlu5kh0bylnM4L1g/JLgLze5QSGzzaZTczJLZojQtfUc4nNN51NhwfPCbQallODQnm2snLZQc+h2UbwFQpcz026gY+HbKdGhKalOsMXuMMpxk3oV3okY24I+9KtZ0LCc9t6qygXm1HIbDSxmcHPOldaj0KsSM2ZXbARsy5nHsdRqDNpriBzyjD08livo/RK3huUPshTPr6i/JClhEIbbUZ/qBWnexDmBxU3Al8XjFsZFwj6wDmkthIs+xDmAxuFPgCv8grw1QSG7kk+xDFvJHSRq7KPoTJH4p7IaWNtMo+hMkvinshpY2cl30Iky8V90JKGzkh+xAmzddJb6S0kRrZhzB5VnEvpLERWC77EAqbe7HeSHoj+PfLOgqxCoJjNs2dFDZyTda5EOxUnjMpbKRa1rkQrFGeM0luBO8BhlJZ50LQ3AbqDbIdSXgjjbKdHpIOKj8WrB9BD1HkbgeP12n+iVJjwfpBtEi200OueVViX9KzNvJKTIYUp1cG/0Oy+jskm7vv5gt+wbDuNcO+6UT8FGMsWNutFvOHRce0/p+Afj4wLFN7hcHim9amuNDHd4btaqtwWLwQk7uBW5GgvvlFeL9aig9e5RjdsrbpQt1xtFetuINnGYaXkfPvHPlCqfdom1rwC/61mH+0pZKDGt0M8U7sfKGIudHdjiZsWX/g+Q7l/znhAwquQh0o1ufNn+AxgBo5dPvR0wWKV6J6GulCef8kQW4/akPVPJz+ArAY0NB8ZG7O1aFmdFHNtjJ/gfEkMv93kvvNbo7/ipKSXx1HK0yKqpBEAAAAAElFTkSuQmCC"/></a>
+                  {/* <a>3</a> */}
+                </Col>
+              </Row>
+              <Row >
+                <Col><Button className="logoutBtn" outline color="success" size="block lg" >Logout</Button></Col>
+              </Row>
+            </Container>
+            </div>
+            : null
+            }
           </nav>
           {/* MAIN PAGE */}
           <div className="container" id="main" >
-          {this.state.navOpen === false ? <span onClick={this.openNav.bind(this)} > > </span> : <span onClick={this.closeNav.bind(this)}> X </span> }
-            <h2>{this.state.currScreen}</h2>
-              <Router screen={this.state.currScreen} status={this.props.status} admin={this.state.adminSidebar} staff={this.state.staffSidebar} />
+          <Container>
+            <Row>
+              <Col  xs="2" sm="2" md="2" lg="2" xl="2" style={{ padding: '0px' }} >
+                {this.state.navOpen === false ? 
+                <span onClick={this.openNav.bind(this)} > <img className="navControllIcon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACGSURBVGhD7dYxDYAwFEXRikABE3PbkREBiCBoQAIKEIEWPMELKRbg/3JPcru/pW0AAHwixrh6L6U0Bh2n9zRmY4il6hqiY/aexvTl7gIA4Of0Ku7e0+s+8Wm0FEOsdQ/JOQ/e05iu3F0AAPycXsWjghY+jZZiiLWeb3zrPY1pyt0FAHhTCBeErfUENOiYMQAAAABJRU5ErkJggg=="/> </span> : 
+                <span onClick={this.closeNav.bind(this)}> <img className="navControllIcon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIRSURBVGhD7ZfPSgJRFMZ1WRD9WbevjdioI+IuWkVQr1BQiyCoV3DtI6hQO9+lP0+Sb6DUd+ocsOHO6D333hmD+4OPYGbud+anjnZrkUgkEvkXdDqdtN1uP3S73UM+5AV0brdarTv0X/KhcCRJcoOBC+QLQ2cYmvApJxqNxj763qmXu0c4XP8965lliaWBzjJZiaXuMU77lTFJSDDwUyuTJyHBuQku8yNTJCHRyKySkHiRwc2lKJqbBmRjI7OuhATXPvFSHSi4NxXnZR0ZWwnOlJfroK9YujlDcW6KZJQSC6y54Ao9dFMomhkG5IZk0jQ94YofNBK4fk7PKFe44yqzERKCVgY53RgJQSNjm+ASQkiZ0iSEEDIkgVzziPLwKVOZhOBDpnIJwUVmYyQEPKBnphtdIwOuqJ5er3eAV/XDcJMrQ+8kvaNcVR0uEpLKZXxISNCj3pw5wRK2/8UWpnSZEBKS0mRCSkiCy2gkcD1tkwf4a/U7QzLZ/YwXtPsJ5OfHjl7hymVcJQSWsd42e5HBx2nLh4SglcG6I67QgZJbU3leiiQEpcwLL9eBkqtsaV7WkRAUMkNeqqaOgRND8Z/YSAgWMm/ILi9zolBGIyHQg7xC5rXZbO7x5V4gmXF2kIuEUCDjXUIgmZEM8iEhGGSCSQgk84hBU3zGz/mYF9B5jDwjw36/v8OHI5FIJBIpgVrtG0QebTgflYm6AAAAAElFTkSuQmCC"/> </span>}
+              </Col>
+              <Col className="text-center" xs="10" sm="10" md="10" lg="10" xl="10" >
+                <h2>{this.state.currScreen}</h2>
+              </Col>
+            </Row>  
+          </Container>
+            <Router screen={this.state.currScreen} status={this.props.status} admin={this.state.adminSidebar} staff={this.state.staffSidebar} />
           </div>
         </div>
-        
+
       </div>
     )
   }

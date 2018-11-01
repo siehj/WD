@@ -1,5 +1,6 @@
 import React from 'react';
 import AccountAuditTool from './NestedComponents/ReportAcctAudit.jsx';
+import { Container, Row, Col } from 'reactstrap';
 
 class Accounts extends React.Component {
   constructor(props) {
@@ -20,13 +21,15 @@ class Accounts extends React.Component {
   render() {
     return (
       <div>
-        <ul className="nav nav-tabs">
-          {
-            this.props.accounts.map((rep, i) => {
-            return i === 0 ? <li className="active" key={i}><a className="tabs" onClick={this.changeScreen.bind(this)} name={rep} >{rep}</a></li> : <li key={i}><a>{rep}</a></li>
-            })
-          }
-        </ul>
+        <Container>
+          <Row className="nav nav-tabs">
+            <Col className="text-center" >
+              {
+                this.props.accounts.map((rep, i) => { return <a className="option" target={i} key={rep} onClick={this.changeMiniScreen} title={rep}>{rep}</a> })
+              }
+            </Col>
+          </Row>
+        </Container>
           {this.state.miniScreen === 'Audit' ? <AccountAuditTool/> : null}
       </div>
     )

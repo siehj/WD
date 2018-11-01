@@ -54,7 +54,6 @@ class Dashboard extends React.Component {
           {this.state.navOpen ?
           <div>
             <div className="sidebar-header text-center" >
-              {/* <a onClick={this.closeNav.bind(this)} >X</a> */}
               <h2>Wellness Dental</h2>
             </div>
             <ul className="list-unstyled components">
@@ -106,7 +105,7 @@ class Dashboard extends React.Component {
                 <span onClick={this.openNav.bind(this)} > <img className="navControllIcon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACGSURBVGhD7dYxDYAwFEXRikABE3PbkREBiCBoQAIKEIEWPMELKRbg/3JPcru/pW0AAHwixrh6L6U0Bh2n9zRmY4il6hqiY/aexvTl7gIA4Of0Ku7e0+s+8Wm0FEOsdQ/JOQ/e05iu3F0AAPycXsWjghY+jZZiiLWeb3zrPY1pyt0FAHhTCBeErfUENOiYMQAAAABJRU5ErkJggg=="/> </span> : 
                 <span onClick={this.closeNav.bind(this)}> <img className="navControllIcon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIRSURBVGhD7ZfPSgJRFMZ1WRD9WbevjdioI+IuWkVQr1BQiyCoV3DtI6hQO9+lP0+Sb6DUd+ocsOHO6D333hmD+4OPYGbud+anjnZrkUgkEvkXdDqdtN1uP3S73UM+5AV0brdarTv0X/KhcCRJcoOBC+QLQ2cYmvApJxqNxj763qmXu0c4XP8965lliaWBzjJZiaXuMU77lTFJSDDwUyuTJyHBuQku8yNTJCHRyKySkHiRwc2lKJqbBmRjI7OuhATXPvFSHSi4NxXnZR0ZWwnOlJfroK9YujlDcW6KZJQSC6y54Ao9dFMomhkG5IZk0jQ94YofNBK4fk7PKFe44yqzERKCVgY53RgJQSNjm+ASQkiZ0iSEEDIkgVzziPLwKVOZhOBDpnIJwUVmYyQEPKBnphtdIwOuqJ5er3eAV/XDcJMrQ+8kvaNcVR0uEpLKZXxISNCj3pw5wRK2/8UWpnSZEBKS0mRCSkiCy2gkcD1tkwf4a/U7QzLZ/YwXtPsJ5OfHjl7hymVcJQSWsd42e5HBx2nLh4SglcG6I67QgZJbU3leiiQEpcwLL9eBkqtsaV7WkRAUMkNeqqaOgRND8Z/YSAgWMm/ILi9zolBGIyHQg7xC5rXZbO7x5V4gmXF2kIuEUCDjXUIgmZEM8iEhGGSCSQgk84hBU3zGz/mYF9B5jDwjw36/v8OHI5FIJBIpgVrtG0QebTgflYm6AAAAAElFTkSuQmCC"/> </span>}
               </Col>
-              <Col className="text-center" xs="10" sm="10" md="10" lg="10" xl="10" >
+              <Col className="text-right" xs="10" sm="10" md="10" lg="10" xl="10" >
                 <h2>{this.state.currScreen}</h2>
               </Col>
             </Row>  

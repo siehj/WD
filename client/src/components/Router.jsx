@@ -11,7 +11,7 @@ const Router = (props) => {
     return <Home status={props.status} />
   }
   if(props.screen === 'Reports'){
-    return <Reports report={props.admin.Reports} />
+    return <Reports status={props.status} report={props.admin.Reports} />
   }
   if(props.screen === 'Resources'){
     return <Resources status={props.status} />
@@ -20,7 +20,7 @@ const Router = (props) => {
     return <Accounts status={props.status} accounts={props.admin.Accounts} />
   }
   if(props.screen === 'Tasks'){
-    return <Tasks status={props.status} adminTasks={props.admin.Tasks} staffTasks={props.staff.Tasks} />
+    return <Tasks status={props.status} toggleTaskModal={props.toggleTaskModal} adminTasks={props.admin.Tasks} staffTasks={props.staff.Tasks} />
   }
   if(props.screen === 'Contacts'){
     return <Contacts status={props.status} />

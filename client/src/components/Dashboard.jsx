@@ -1,6 +1,7 @@
 import React from 'react';
 import Router from './Router.jsx';
 import Chat from './Chat.jsx';
+import TaskModal from './TaskModal.jsx';
 import { Button, Container, Row, Col } from 'reactstrap';
 
 
@@ -25,9 +26,10 @@ class Dashboard extends React.Component {
         'Resources': ['Tutorials', 'Employee Resources', 'Office Resources'],
         'Contacts': [],
       },
-      navOpen: true
+      navOpen: true,
+      displayTaskModel: false 
     }
-
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   changeScreen(e) {
@@ -46,6 +48,10 @@ class Dashboard extends React.Component {
     this.setState({ navOpen: false });
   }
 
+  toggleModal(e) {
+    e.target.title === "task" ? this.setState({ displayTaskModel : !this.state.displayTaskModel }) : null;
+  }
+
   render() {
     return (
       <div id="dashboard"  >
@@ -56,6 +62,7 @@ class Dashboard extends React.Component {
             <div className="sidebar-header text-center" >
               <h2>Wellness Dental</h2>
             </div>
+                    {/* REFACTOR LIST FOR NAV */}
             <ul className="list-unstyled components">
               {this.props.status === 'Admin' ?
                 Object.keys(this.state.adminSidebar).map((option, i) => {
@@ -94,10 +101,11 @@ class Dashboard extends React.Component {
             </Container>
             </div>
             : null
-            }
+          }
           </nav>
           {/* MAIN PAGE */}
           <div className="container" id="main" >
+          {this.state.displayTaskModel === true ? <TaskModal status={this.state.displayTaskModel} toggleTaskModal={this.toggleModal} /> : null }
           <Container>
             <Row>
               <Col  xs="2" sm="2" md="2" lg="2" xl="2" style={{ padding: '0px' }} >
@@ -110,7 +118,7 @@ class Dashboard extends React.Component {
               </Col>
             </Row>  
           </Container>
-            <Router screen={this.state.currScreen} status={this.props.status} admin={this.state.adminSidebar} staff={this.state.staffSidebar} />
+            <Router screen={this.state.currScreen} toggleTaskModal={this.toggleModal} status={this.props.status} admin={this.state.adminSidebar} staff={this.state.staffSidebar} />
           </div>
         </div>
 

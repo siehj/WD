@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Login from './components/Login.jsx';
 import Dashboard from './components/Dashboard.jsx';
+const axios = require('axios');
 
 class App extends React.Component {
   constructor(props) {
@@ -16,22 +17,26 @@ class App extends React.Component {
 
   handleLogin() {
     // e.preventDefault();
-    
-    $.ajax({
-      url: '/login',
-      method: 'POST',
-      data: {
-        username: this.state.username,
-        password: this.state.password
-      },
-      success: () => {
-        // console.log('yes');
+    axios.post('/login', { username: this.state.username, password: this.state.password })
+      .then(() => {
         this.setState({ loggedIn: true });
-      }, 
-      error: (err) => {
-        console.log(err);
-      }
-    });
+      })
+      .catch(() => {console.log});
+    // $.ajax({
+    //   url: '/login',
+    //   method: 'POST',
+    //   data: {
+    //     username: this.state.username,
+    //     password: this.state.password
+    //   },
+    //   success: () => {
+    //     // console.log('yes');
+    //     this.setState({ loggedIn: true });
+    //   }, 
+    //   error: (err) => {
+    //     console.log(err);
+    //   }
+    // });
   }
 
   updateUserInfo(e) {

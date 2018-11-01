@@ -1,6 +1,7 @@
 import React from 'react';
 import Router from './Router.jsx';
 import Chat from './Chat.jsx';
+import { Button, Row, Col } from 'reactstrap';
 
 
 class Dashboard extends React.Component {
@@ -34,7 +35,7 @@ class Dashboard extends React.Component {
   }
 
   openNav() {
-    document.getElementById("sidebar").style.width = '30%';
+    document.getElementById("sidebar").style.width = '35%';
     // document.getElementById("main").style.marginLeft = '30%';    
     this.setState({ navOpen: true });
   }
@@ -78,6 +79,7 @@ class Dashboard extends React.Component {
               }
             </ul>
             {/* <Chat /> */}
+            
           </nav>
           {/* MAIN PAGE */}
           <div className="container" id="main" >

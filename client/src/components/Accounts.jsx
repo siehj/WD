@@ -1,12 +1,12 @@
 import React from 'react';
-import AccountAuditTool from './NestedComponents/ReportAcctAudit.jsx';
+import AccountAuditTool from './AccountComponents/AcctAudit.jsx';
 import { Container, Row, Col } from 'reactstrap';
 
 class Accounts extends React.Component {
   constructor(props) {
     super(props); 
     this.state = {
-      miniScreen : '',
+      miniScreen : 'Audit',
       index: 0
     };
     this.changeMiniScreen = this.changeMiniScreen.bind(this);

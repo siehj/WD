@@ -19,7 +19,6 @@ class Reports extends React.Component {
   }
   
   render() {
-    console.log(this.state.index);
     return (
       <div >
         <Container>

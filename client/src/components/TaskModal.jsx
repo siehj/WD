@@ -3,18 +3,28 @@ import {
   Button, Modal, 
   ModalHeader, ModalBody, 
   ModalFooter, Input, 
-  Label, Form, FormGroup } from 'reactstrap';
+  Label, Form, InputGroup } from 'reactstrap';
 
 const TaskModal = (props) => {
   return (
     <div>
       <Modal isOpen={props.status} >
-        <ModalHeader>
-        </ModalHeader>
-        <ModalBody>BODY</ModalBody>
+        <ModalHeader className="text-center"> Create A New Task </ModalHeader>
+        <ModalBody>
+          <Form>
+            <InputGroup>
+              <Label>Task</Label> 
+              <Input/>
+            </InputGroup>
+            <InputGroup>
+              <Label>Note</Label>
+              <Input/>
+            </InputGroup>
+          </Form>
+        </ModalBody>
         <ModalFooter>
-          <Button title="task" >Create</Button>
-          <Button title="task" onClick={props.toggleTaskModal} >Cancel</Button>
+          <Button size="sm" title="task" color="success" >Create</Button>
+          <Button size="sm" title="task" onClick={props.toggleTaskModal} >Cancel</Button>
         </ModalFooter>
       </Modal>
     </div>

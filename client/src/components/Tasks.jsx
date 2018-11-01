@@ -78,6 +78,21 @@ class Tasks extends React.Component {
         <TaskCard employee={this.state.currEmployeeOnly.user} tasks={this.state.currEmployeeOnly.tasks} />
        </div>
       }
+      <div style={{ paddingTop: '10px'}} >
+        <Row className="text-center">
+          <Col>
+            <ListGroup>
+              <ListGroupItem className="allTasks" > Unassigned </ListGroupItem>
+            </ListGroup>
+          </Col>
+          <Col>
+            <ListGroup>
+              <ListGroupItem className="allTasks" > Unassigned </ListGroupItem>
+            </ListGroup>
+          </Col>
+        </Row>
+      </div>
+      
       </div>
       </div>
     )

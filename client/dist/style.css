@@ -24,14 +24,14 @@ h3 {
   margin-left: 30px;
 }
 
-.wrapper {
+/* .wrapper {
   display: flex;
   width: 100%;
   align-items: stretch;
-}
+} */
 
 #sidebar {
-  width: 35%;
+  width: 30%;
   min-height: 100vh;
   /* background: rgb(145, 145, 145); */
   /* background-color: #47748b; */
@@ -101,4 +101,16 @@ h3 {
 
 .tabs {
   cursor: pointer;
+}
+
+.icon {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.logoutBtn {
+  margin-top: 40px;
+  padding-top: 3px;
+  padding-bottom: 5px;
 }

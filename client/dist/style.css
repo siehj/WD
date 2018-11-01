@@ -148,3 +148,7 @@ h3 {
 .miniMain {
   padding-top: 10px;
 }
+
+.justify-content-between {
+  cursor: pointer;
+}

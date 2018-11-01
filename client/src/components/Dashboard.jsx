@@ -1,7 +1,7 @@
 import React from 'react';
 import Router from './Router.jsx';
 import Chat from './Chat.jsx';
-import TaskModal from './TaskModal.jsx';
+import TaskModal from './TaskComponents/TaskModal.jsx';
 import { Button, Container, Row, Col, Badge } from 'reactstrap';
 
 

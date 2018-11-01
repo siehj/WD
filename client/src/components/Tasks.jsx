@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Row, Col, Collapse, ListGroup, ListGroupItem } from 'reactstrap';
+import { Button, Container, Row, Col, Collapse, ListGroup, ListGroupItem, Badge } from 'reactstrap';
 import TaskCard from './TaskComponents/EmployeeTaskCard.jsx';
 
 
@@ -20,6 +20,8 @@ class Tasks extends React.Component {
         user: 'Sieh',
         tasks: [4576, 6547, 9]
       },
+      poolTasks: [{'task1': 'unassigned'}, {'task2': 'completed'}, {'task2': 'completed'}],
+      taskTotal: 0,
       user: 'Sieh',
       collapse: false
     };
@@ -27,12 +29,23 @@ class Tasks extends React.Component {
   }
 
   componentDidMount() {
-    // console.log(this.props.status === 'Admin');
-    //if admin, get all employees and their tasks. 
-  
+    
+    if(this.props.status === 'Admin') {
+      //if admin, get all employees and their tasks. and pool data
+      
+      //update employees object
+      //update total number of tasks
+      let total = 0;
+      Object.values(this.state.employees).map(num => total += num.length);
+      this.setState({ taskTotal : total });
 
-    // else get this employee's info
+    } else {
+      // else get this employee's info data
+      
+    }  
   }
+
+
   toggleAllEmployeeView() {
     this.setState({ collapse: !this.state.collapse });
   }
@@ -51,7 +64,9 @@ class Tasks extends React.Component {
       <div className="miniMain" >
       {this.props.status === 'Admin' ?
         <ListGroup>
-          <ListGroupItem onClick={this.toggleAllEmployeeView} className="allTasks" >All Assigned Tasks</ListGroupItem>
+          <ListGroupItem onClick={this.toggleAllEmployeeView} className="allTasks" >
+            <a style={{ fontSize: '20px' }} > All Assigned Tasks </a> <Badge color="success" pill>{this.state.taskTotal}</Badge>
+          </ListGroupItem>
           <Collapse isOpen={this.state.collapse} >
             {Object.keys(this.state.employees).map((person, i) => {
               return <TaskCard key={i} employee={person} tasks={this.state.employees[person]} />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Row, Col } from 'reactstrap';
+import { Button, Container, Row, Col, Collapse, ListGroup, ListGroupItem } from 'reactstrap';
 import TaskCard from './TaskComponents/EmployeeTaskCard.jsx';
 
 
@@ -21,8 +21,9 @@ class Tasks extends React.Component {
         tasks: [4576, 6547, 9]
       },
       user: 'Sieh',
-      collapse: true
+      collapse: false
     };
+    this.toggleAllEmployeeView = this.toggleAllEmployeeView.bind(this);
   }
 
   componentDidMount() {
@@ -32,7 +33,9 @@ class Tasks extends React.Component {
 
     // else get this employee's info
   }
-  
+  toggleAllEmployeeView() {
+    this.setState({ collapse: !this.state.collapse });
+  }
 
   render() {
     return (
@@ -47,11 +50,14 @@ class Tasks extends React.Component {
       
       <div className="miniMain" >
       {this.props.status === 'Admin' ?
-        <div>
-        {Object.keys(this.state.employees).map((person, i) => {
-          return <TaskCard key={i} employee={person} tasks={this.state.employees[person]} />
-        })}
-        </div>
+        <ListGroup>
+          <ListGroupItem onClick={this.toggleAllEmployeeView} className="allTasks" >All Assigned Tasks</ListGroupItem>
+          <Collapse isOpen={this.state.collapse} >
+            {Object.keys(this.state.employees).map((person, i) => {
+              return <TaskCard key={i} employee={person} tasks={this.state.employees[person]} />
+            })}
+          </Collapse>
+        </ListGroup>
        :
        <div>
         <TaskCard employee={this.state.currEmployeeOnly.user} tasks={this.state.currEmployeeOnly.tasks} />

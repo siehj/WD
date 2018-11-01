@@ -87,7 +87,7 @@ class Tasks extends React.Component {
           </Col>
           <Col>
             <ListGroup>
-              <ListGroupItem className="allTasks" > Unassigned </ListGroupItem>
+              <ListGroupItem className="allTasks" > Completed </ListGroupItem>
             </ListGroup>
           </Col>
         </Row>

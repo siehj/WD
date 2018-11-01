@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   Button, Modal, 
   ModalHeader, ModalBody, 
-  ModalFooter, Input, 
+  ModalFooter, Input, InputGroupAddon, InputGroupText,
   Label, Form, InputGroup } from 'reactstrap';
 
 const TaskModal = (props) => {
@@ -13,11 +13,15 @@ const TaskModal = (props) => {
         <ModalBody>
           <Form>
             <InputGroup>
-              <Label>Task</Label> 
+            <InputGroupAddon addonType="prepend" >
+              <InputGroupText>Task</InputGroupText>
+            </InputGroupAddon>
               <Input/>
             </InputGroup>
             <InputGroup>
-              <Label>Note</Label>
+            <InputGroupAddon addonType="prepend" >
+              <InputGroupText>Note</InputGroupText>
+            </InputGroupAddon>
               <Input/>
             </InputGroup>
           </Form>

@@ -157,4 +157,8 @@ h3 {
   background-color: #a3a3a3;
   color: white;
   text-align: center;
+  cursor: pointer;
+}
+.allTasks:hover{
+  background-color: #4c4d4c;
 }

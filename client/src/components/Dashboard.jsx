@@ -24,11 +24,25 @@ class Dashboard extends React.Component {
         'Resources': ['Tutorials', 'Employee Resources', 'Office Resources'],
         'Contacts': [],
       },
+      navOpen: true
     }
+
   }
 
   changeScreen(e) {
     this.setState({ currScreen : `${e.target.name}` });
+  }
+
+  openNav() {
+    document.getElementById("sidebar").style.width = '30%';
+    // document.getElementById("main").style.marginLeft = '30%';    
+    this.setState({ navOpen: true });
+  }
+
+  closeNav() {
+    document.getElementById("sidebar").style.width = '0px';
+    document.getElementById("main").style.marginLeft = '0px';    
+    this.setState({ navOpen: false });
   }
 
   render() {
@@ -37,6 +51,7 @@ class Dashboard extends React.Component {
         <div className="wrapper" >
           <nav id="sidebar" >
             <div className="sidebar-header" >
+            {/* <a onClick={this.closeNav.bind(this)} >X</a> */}
               <h2>Wellness Dental</h2>
             </div>
             <ul className="list-unstyled components">
@@ -66,6 +81,7 @@ class Dashboard extends React.Component {
           </nav>
           {/* MAIN PAGE */}
           <div className="container" id="main" >
+          {this.state.navOpen === false ? <span onClick={this.openNav.bind(this)} > > </span> : <span onClick={this.closeNav.bind(this)}> X </span> }
             <h2>{this.state.currScreen}</h2>
               <Router screen={this.state.currScreen} status={this.props.status} admin={this.state.adminSidebar} staff={this.state.staffSidebar} />
           </div>

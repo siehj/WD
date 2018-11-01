@@ -7,6 +7,8 @@ const http = require('http');
 const socketIo = require('socket.io');
 const server = http.createServer(app);
 const io = socketIo(server);
+const fs = require('fs');
+
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
@@ -28,6 +30,8 @@ io.on('connection', (socket) => {
      console.log('A user disconnected');
   });
 });
+
+
 
 
 const port = process.env.PORT || 3000;

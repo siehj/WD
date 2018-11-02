@@ -11,6 +11,13 @@ CREATE TABLE contacts (
   PRIMARY KEY (ID)
 );
 
+CREATE TABLE companyType (
+  id int NOT NULL AUTO_INCREMENT,
+  Name text,
+  PRIMARY KEY (ID)
+)
+ALTER TABLE 'contacts' ADD FOREIGN KEY (type_id) REFERENCES 'companyType' ('id');
+
 CREATE TABLE employees (
   id int NOT NULL AUTO_INCREMENT,
   Name varchar(100), 

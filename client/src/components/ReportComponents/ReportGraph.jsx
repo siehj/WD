@@ -11,14 +11,23 @@ const ReportGraphs = (props) => {
         <Col>
           <Card>
             <CardBody>
-              {/* <img width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" /> */}
-              <BarGraph/>
+              <BarGraph YPData={props.graphData.YP} />
               <CardSubtitle className="text-center"> <em> Yearly Production</em></CardSubtitle>
             </CardBody>
           </Card>
         </Col>
       </Row>
-
+      <Row>
+        <Col>
+          <Card>
+            <CardBody>
+              
+              <CardSubtitle className="text-center" ><em>New patients ({new Date().getMonth()-1}/{new Date().getFullYear()})</em></CardSubtitle>
+            </CardBody>
+          </Card>
+        </Col>
+        <Col>2</Col>
+      </Row>
     </div>
   )
 }

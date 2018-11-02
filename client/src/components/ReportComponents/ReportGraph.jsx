@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col, Card, CardImg, CardText, CardBody, CardLink,
   CardTitle, CardSubtitle } from 'reactstrap';
 import BarGraph from './BarGraph.jsx';
+import LineGraph from './LineGraph.jsx';
 
 const ReportGraphs = (props) => {
   return (
@@ -17,11 +18,11 @@ const ReportGraphs = (props) => {
           </Card>
         </Col>
       </Row>
-      <Row>
+      <Row style={{ paddingTop: '10px' }} >
         <Col>
           <Card>
-            <CardBody>
-              
+            <CardBody className="lineGraph">
+              <LineGraph NPData={props.graphData.NP}  />
               <CardSubtitle className="text-center" ><em>New patients ({new Date().getMonth()-1}/{new Date().getFullYear()})</em></CardSubtitle>
             </CardBody>
           </Card>

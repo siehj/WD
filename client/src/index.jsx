@@ -11,33 +11,18 @@ class App extends React.Component {
       loggedIn: false,
       username: '',
       password: '',
-      empStatus: 'Admin' // Admin or Staff
+      empStatus: 'Staff', // Admin or Staff
+      error: ''
     }
   }
 
-  handleLogin() {
-    // e.preventDefault();
+  handleLogin() { 
     axios.post('/login', { username: this.state.username, password: this.state.password })
-      .then((result) => {
-        console.log(result.data);
+      .then(({ data }) => {
+        data.admin_status ? this.setState({ empStatus: "Admin" }) : null 
         this.setState({ loggedIn: true });
       })
-      .catch(() => {console.log});
-    // $.ajax({
-    //   url: '/login',
-    //   method: 'POST',
-    //   data: {
-    //     username: this.state.username,
-    //     password: this.state.password
-    //   },
-    //   success: () => {
-    //     // console.log('yes');
-    //     this.setState({ loggedIn: true });
-    //   }, 
-    //   error: (err) => {
-    //     console.log(err);
-    //   }
-    // });
+      .catch(() => { this.setState({ error: 'Username or Password are not correct' })});
   }
 
   updateUserInfo(e) {

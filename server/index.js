@@ -24,15 +24,44 @@ app.post('/login', (req, res) => {
     else result.password === req.body.password ? 
       res.send({ username: req.body.username, admin_status: result.admin_status }) : res.status(500);
   });
-})
-
+});
 
 app.post('/api/saveTask', (req, res) => {
   //
   // console.log(req.body.newTask);
   db.addTask(req.body.newTask)
   res.end();
-})
+});
+
+app.get('/api/getAllTasks', (req, res) => {
+  db.getAllTasks((err, tasks) => {
+    if(err) console.error;
+    else res.send(tasks);
+  });
+});
+
+app.get('/api/getUserTasks', (req, res) => {
+  db.getAllUserTasks(req.body.username, (err, tasks) => {
+    if(err) console.error;
+    else res.send(tasks);
+  });
+});
+
+app.post('/api/completeTask', (req, res) => {
+  db.completeTask(req.body.taskId, (err, result) => {
+    if(err) console.error;
+    else res.end();
+  });
+});
+
+app.post('/api/assignTask', (req, res) => {
+  db.assignTask(req.body.taskId, req.body.user, (err, result) => {
+    if(err) console.error;
+    else res.end();
+  });
+});
+
+
 
 //Whenever someone connects this gets executed
 io.on('connection', (socket) => {

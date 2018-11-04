@@ -2,6 +2,7 @@ import React from 'react';
 import Router from './Router.jsx';
 import Chat from './Chat.jsx';
 import TaskModal from './TaskComponents/TaskModal.jsx';
+import ContactModal from './ContactComponents/ContactModal.jsx';
 import { Button, Container, Row, Col, Badge } from 'reactstrap';
 
 
@@ -27,10 +28,12 @@ class Dashboard extends React.Component {
         'Contacts': [],
       },
       navOpen: true,
-      displayTaskModel: false,
+      displayTaskModal: false,
+      displayContactModal: false,
       newMessages: []
     }
     this.toggleModal = this.toggleModal.bind(this);
+    this.submitCloseModal = this.submitCloseModal.bind(this);
   }
 
   changeScreen(e) {
@@ -50,7 +53,16 @@ class Dashboard extends React.Component {
   }
 
   toggleModal(e) {
-    e.target.title === "task" ? this.setState({ displayTaskModel : !this.state.displayTaskModel }) : null;
+    e.target.title === "task" ? this.setState({ displayTaskModal : !this.state.displayTaskModal }) : 
+    e.target.title === "contact" ? this.setState({ displayContactModal : !this.state.displayContactModal }) : null;
+  }
+
+  submitCloseModal(value) {
+    if(value === 'task') {
+      this.setState({ displayTaskModal : false });
+    } else if (value === 'contact') {
+      this.setState({ displayContactModal : false });
+    }
   }
 
   render() {
@@ -111,7 +123,8 @@ class Dashboard extends React.Component {
           </nav>
           {/* MAIN PAGE */}
           <div className="container" id="main" >
-          {this.state.displayTaskModel === true ? <TaskModal status={this.state.displayTaskModel} toggleTaskModal={this.toggleModal} /> : null }
+          {this.state.displayTaskModal === true ? <TaskModal status={this.state.displayTaskModal} toggleTaskModal={this.toggleModal} submit={this.submitCloseModal} /> : null }
+          {this.state.displayContactModal === true ? <ContactModal status={this.state.displayContactModal} toggleContactModal={this.toggleModal} submit={this.submitCloseModal} /> : null }
           <Container>
             <Row>
               <Col  xs="2" sm="2" md="2" lg="2" xl="2" style={{ padding: '0px' }} >
@@ -124,7 +137,7 @@ class Dashboard extends React.Component {
               </Col>
             </Row>  
           </Container>
-            <Router screen={this.state.currScreen} toggleTaskModal={this.toggleModal} status={this.props.status} admin={this.state.adminSidebar} staff={this.state.staffSidebar} />
+            <Router screen={this.state.currScreen} toggleModal={this.toggleModal} status={this.props.status} admin={this.state.adminSidebar} staff={this.state.staffSidebar} />
           </div>
         </div>
 

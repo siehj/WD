@@ -162,3 +162,13 @@ h3 {
 .allTasks:hover{
   background-color: #4c4d4c;
 }
+
+.input-group-text {
+  width: 75px;
+}
+
+form label {
+  margin-bottom: 0px;
+  margin-top: 8px;
+}
+

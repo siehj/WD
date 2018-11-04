@@ -23,7 +23,7 @@ class Contacts extends React.Component {
         <Container>
           <Row>
             <Col className="text-right">
-              <Button size="sm" color="success" title="task" onClick={this.props.toggleTaskModal} >NEW CONTACT +</Button>
+              <Button size="sm" color="success" title="contact" onClick={this.props.toggleContactModal} >NEW CONTACT +</Button>
             </Col>
           </Row>
         </Container>

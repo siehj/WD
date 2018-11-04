@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Container, Row, Col, Collapse, ListGroup, ListGroupItem, Badge } from 'reactstrap';
 import TaskCard from './TaskComponents/EmployeeTaskCard.jsx';
+const axios = require('axios');
 
 
 class Tasks extends React.Component {
@@ -23,7 +24,7 @@ class Tasks extends React.Component {
       poolTasks: [{'task1': 'unassigned'}, {'task2': 'completed'}, {'task2': 'completed'}],
       taskTotal: 0,
       user: 'Sieh',
-      collapse: false
+      collapse: false,
     };
     this.toggleAllEmployeeView = this.toggleAllEmployeeView.bind(this);
   }

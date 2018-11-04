@@ -20,10 +20,10 @@ const Router = (props) => {
     return <Accounts status={props.status} accounts={props.admin.Accounts} />
   }
   if(props.screen === 'Tasks'){
-    return <Tasks status={props.status} toggleTaskModal={props.toggleTaskModal} adminTasks={props.admin.Tasks} staffTasks={props.staff.Tasks} />
+    return <Tasks status={props.status} toggleTaskModal={props.toggleModal} adminTasks={props.admin.Tasks} staffTasks={props.staff.Tasks} />
   }
   if(props.screen === 'Contacts'){
-    return <Contacts status={props.status} />
+    return <Contacts status={props.status} toggleContactModal={props.toggleModal} />
   } 
   // if(props.screen === 'Chat'){
   //   return <Chat/>

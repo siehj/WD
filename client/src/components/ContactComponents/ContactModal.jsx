@@ -27,8 +27,8 @@ const ContactModal = (props) => {
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button size="sm" title="Contact" color="success" >Create</Button>
-          <Button size="sm" title="Contact" onClick={props.toggleContactModal} >Cancel</Button>
+          <Button size="sm" title="contact" color="success" >Create</Button>
+          <Button size="sm" title="contact" onClick={props.toggleContactModal} >Cancel</Button>
         </ModalFooter>
       </Modal>
     </div>

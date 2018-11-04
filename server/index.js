@@ -26,6 +26,13 @@ app.post('/login', (req, res) => {
   });
 })
 
+
+app.post('/api/saveTask', (req, res) => {
+  //
+  console.log(req.body.newTask);
+  res.end();
+})
+
 //Whenever someone connects this gets executed
 io.on('connection', (socket) => {
   console.log('A user connected', socket.id);

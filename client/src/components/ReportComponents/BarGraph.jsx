@@ -5,7 +5,7 @@ import  { XYPlot, VerticalBarSeries, XAxis, YAxis, Hint } from 'react-vis';
 const BarGraph = (props) => {
  return (
    <div id="barGraph" >
-    <XYPlot height={300} width={600} color="#28a745" >
+    <XYPlot height={300} width={790} color="#28a745" >
       
       <XAxis bottom={0} hideLine title="months" />
       <YAxis left={0} hideLine  />

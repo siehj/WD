@@ -7,7 +7,7 @@ const ARTool = (props) => {
       <Container>
         <Row>
           <InputGroup className="text-center" >
-            <Input type="file" size="sm" />
+            <Input type="file" bsSize="sm" />
           </InputGroup>
 
         </Row>

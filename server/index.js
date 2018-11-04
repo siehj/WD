@@ -7,7 +7,7 @@ const http = require('http');
 const socketIo = require('socket.io');
 const server = http.createServer(app);
 const io = socketIo(server);
-const db = require('../Database');
+// const db = require('../Database');
 // const fs = require('fs');
 
 
@@ -29,7 +29,8 @@ app.post('/login', (req, res) => {
 
 app.post('/api/saveTask', (req, res) => {
   //
-  console.log(req.body.newTask);
+  // console.log(req.body.newTask);
+  db.addTask(req.body.newTask)
   res.end();
 })
 

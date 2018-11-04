@@ -38,7 +38,60 @@ const verifyEmployee = (data, callback) => {
 }
 
 // TASKS -- add, complete, get all, assign, update
+const addTask = (task, callback) => {
+  let date = new Date;
+  let deadline = new Date(task.deadline);
+
+  let qs = `INSERT INTO tasks (task, note, completed, created, deadline, employee_id) 
+  VALUES ('${task.task}', '${task.note}', '${task.completed}', '${date.toISOString().split('T')[0]}', '${deadline.toISOString().split('T')[0]}', '${task.assignedTo === 'unassigned' ? 'unassigned' : task.assignedTo}');`;
+  // console.log(qs);
+  con.query(qs, (err, result) => {
+    if(err) callback(err, null);
+    else callback(null, result[0]);
+  });
+};
+
+const getAllTasks = (callback) => {
+  let qs = `SELECT * FROM tasks`;
+  con.query(qs, (err, result) => {
+    if(err) callback(err, null);
+    else callback(null, result[0]);
+  });
+};
+
+const getAllUserTasks = (user, callback) => {
+  let qs = `SELECT * FROM tasks WHERE username='${user};`;
+  con.query(qs, (err, result) => {
+    if(err) callback(err, null);
+    else callback(null, result[0]);
+  });
+};
+
+const assignTask = (taskId, user, callback) => {
+  let qs = `UPDATE tasks SET employee_id=(SELECT id FROM employees WHERE name='${user}') WHERE id='${taskId}';`;
+  con.query(qs, (err, result) => {
+    if (err) callback(err, null);
+    else callback(null, result[0]);
+  });
+};
+
+const completeTask = (taskId, callback) => {
+  let qs = `UPDATE tasks SET completed=1 WHERE id='${taskId}';`;
+  con.query(qs, (err, result) => {
+    if (err) callback(err, null);
+    else callback(null, result[0]);
+  });
+};
 
 
-module.exports = { addContact, verifyEmployee };
+
+
+module.exports = { addContact, 
+  verifyEmployee, 
+  addTask, 
+  completeTask, 
+  assignTask,
+  getAllTasks,
+  getAllUserTasks 
+};
 

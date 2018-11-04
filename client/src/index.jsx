@@ -18,7 +18,8 @@ class App extends React.Component {
   handleLogin() {
     // e.preventDefault();
     axios.post('/login', { username: this.state.username, password: this.state.password })
-      .then(() => {
+      .then((result) => {
+        console.log(result.data);
         this.setState({ loggedIn: true });
       })
       .catch(() => {console.log});

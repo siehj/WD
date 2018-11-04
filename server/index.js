@@ -17,10 +17,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.post('/login', (req, res) => {
-  console.log(req.body);
-
-  res.send('hey');
-})
+  
+  // temporary function until bcrypt is installed
+  db.verifyEmployee(req.body, (err, result) => {
+    if(err) console.log(err);
+    else result.password === req.body.password ? res.send(result) : res.status(500).send('Username or Password are not correct');
+  });
+});
 
 //Whenever someone connects this gets executed
 io.on('connection', (socket) => {

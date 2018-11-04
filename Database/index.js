@@ -26,10 +26,20 @@ const addContact = (data, callback) => {
 };
 
 // EMPLOYEES -- add, remove update, get all
-
+const verifyEmployee = (data, callback) => {
+  let qs = `SELECT password,admin_status FROM employees WHERE name='${data.username}';`;
+  con.query(qs, (err, result) => {
+    // console.log(result);
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result[0]);
+    }
+  });
+}
 
 // TASKS -- add, complete, get all, assign, update
 
 
-module.exports = { addContact, };
+module.exports = { addContact, verifyEmployee };
 

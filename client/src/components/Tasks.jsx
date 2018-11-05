@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Container, Row, Col, Collapse, ListGroup, ListGroupItem, Badge } from 'reactstrap';
 import TaskCard from './TaskComponents/EmployeeTaskCard.jsx';
+import { fakeTasks, fakeEmployees, fakeTaskPool } from '../../../Database/fakeData.js';
 const axios = require('axios');
 
 
@@ -8,15 +9,7 @@ class Tasks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      employees: {
-        'Dr. Johnson': [34, 3454, 564], 
-        'Sieh': [4576, 6547, 9], 
-        'Kellee': [345], 
-        'DD': [345346, 768], 
-        'Karla': [354],
-        "Stephanie": [5465, 6576, 888899, 3456, 54], 
-        "Kari": [4354, 65, 89]
-      },
+      employees: { },
       currEmployeeOnly: {
         user: 'Sieh',
         tasks: [4576, 6547, 9]
@@ -33,12 +26,26 @@ class Tasks extends React.Component {
     
     if(this.props.status === 'Admin') {
       //if admin, get all employees and their tasks. and pool data
-      
+      console.log(this.state.employees);
       //update employees object
       //update total number of tasks
-      let total = 0;
-      Object.values(this.state.employees).map(num => total += num.length);
-      this.setState({ taskTotal : total });
+      let empsTasks = {};
+      let tasks = {};
+
+      fakeEmployees.map(emp => {
+        empsTasks[emp.id] = emp.username;
+        tasks[emp.username] = [];
+      });
+      
+      fakeTasks.map(task => {
+        empsTasks[task.employee_id] ?  tasks[empsTasks[task.employee_id]].push(task) : null;
+      });
+
+      this.setState({ employees : tasks }, () => {
+        let total = 0;
+        Object.values(this.state.employees).map(num => total += num.length);
+        this.setState({ taskTotal : total });
+      });
 
     } else {
       // else get this employee's info data

@@ -4,13 +4,17 @@ import { ListGroup, ListGroupItem, Badge, Collapse, Row, Col, Button } from 'rea
 class TaskCard extends React.Component {
   constructor(props){
     super(props);
-    this.state = { collapse : false };
-    this.toggleView = this.toggleView.bind(this);
+    this.state = { 
+      collapse : false,
+    };
 
+    this.toggleView = this.toggleView.bind(this);
   }
   toggleView(e) {
     this.setState({ collapse: !this.state.collapse });
   }
+ 
+
   render(){
     return (
       <ListGroup id="taskGroup" >
@@ -20,12 +24,13 @@ class TaskCard extends React.Component {
             return (
             <ListGroupItem key={i} className="indivTask" > 
               <Row>
-                <Col> <em>{task.task}</em> </Col>
-                <Col > <a> {task.deadline}</a> </Col>
-                <Col> 
-                  <Button size="sm" outline color="success" >Complete</Button>
+                <Col sm="8" md="8" lg="8" xl="8" >
+                  Task: <em >{task.task}</em>   
                 </Col>
-               
+                <Col  > 
+                  Deadline: <a style={{ color: 'red' }}> {task.deadline}</a> 
+                </Col>
+                <Col sm="1.5" md="1.5" lg="1.5" xl="1.5" > <Button size="sm" outline color="success" >Complete</Button></Col>
               </Row>
             </ListGroupItem>
             )

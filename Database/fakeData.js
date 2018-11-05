@@ -30,16 +30,19 @@ const fakeTaskPool = [
 ];
 
 const fakeEmployees = [
-  {id: 0, name: 'Intern', username: 'intern', admin_status: true, position_id: 0 },  
+  // {id: 0, name: 'Intern', username: 'intern', admin_status: true, position_id: 0 },  
   {id: 1, name: 'Sieh', username: 'Sieh', admin_status: true, position_id: 1 },
   {id: 2, name: 'Francisca', username: 'Dr.J', admin_status: true, position_id: 1 },
   {id: 3, name: 'Kellee', username: 'Kellee', admin_status: true, position_id: 1 },
   {id: 4, name: 'Stephanie', username: 'Steph', admin_status: false, position_id: 2 },
   {id: 5, name: 'Ande', username: 'DD', admin_status: false, position_id: 2 },
-  {id: 6, name: 'Karla', username: 'Karlita', admin_status: false, position_id: 2 },
+  {id: 6, name: 'Karla', username: 'Karla', admin_status: false, position_id: 2 },
   {id: 7, name: 'Kari', username: 'Kari', admin_status: false, position_id: 3 },
 ];
 
 const fakeContacts = [
-  
+
 ];
+
+export {fakeTasks, fakeTaskPool, fakeEmployees};
+//

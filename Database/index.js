@@ -52,7 +52,8 @@ const addTask = (task, callback) => {
 };
 
 const getAllTasks = (callback) => {
-  let qs = `SELECT * FROM tasks`;
+  let qs = `SELECT tasks.id, tasks.task, tasks.note, tasks.completed, tasks.created, tasks.deadline, employees.username FROM tasks
+  INNER JOIN employees ON tasks.id = employees.id`;
   con.query(qs, (err, result) => {
     if(err) callback(err, null);
     else callback(null, result[0]);

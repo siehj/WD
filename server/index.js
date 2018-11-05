@@ -7,7 +7,8 @@ const http = require('http');
 const socketIo = require('socket.io');
 const server = http.createServer(app);
 const io = socketIo(server);
-// const db = require('../Database');
+// import { fakeData } from './fakeData.js';
+const db = require('../Database');
 // const fs = require('fs');
 
 

@@ -48,11 +48,12 @@ app.get('/api/getUserTasks', (req, res) => {
   });
 });
 
-app.post('/api/completeTask', (req, res) => {
-  db.completeTask(req.body.taskId, (err, result) => {
-    if(err) console.error;
-    else res.end();
-  });
+app.put('/api/completeTask', (req, res) => {
+  console.log(req.body);
+  // db.completeTask(req.body.taskId, (err, result) => {
+  //   if(err) console.error;
+  //   else res.end();
+  // });
 });
 
 app.post('/api/assignTask', (req, res) => {

@@ -24,13 +24,9 @@ class TaskCard extends React.Component {
             return (
             <ListGroupItem key={i} className="indivTask" > 
               <Row>
-                <Col sm="8" md="8" lg="8" xl="8" >
-                  Task: <em >{task.task}</em>   
-                </Col>
-                <Col  > 
-                  Deadline: <a style={{ color: 'red' }}> {task.deadline}</a> 
-                </Col>
-                <Col sm="1.5" md="1.5" lg="1.5" xl="1.5" > <Button size="sm" outline color="success" >Complete</Button></Col>
+                <Col sm="6" md="6" lg="8" xl="8" >Task: <em >{task.task}</em></Col>
+                <Col> Deadline: <a style={{ color: 'red' }}> {task.deadline}</a></Col>
+                <Col sm="1.5" md="1.5" lg="1.5" xl="1.5" > <Button size="sm" outline color="success" onClick={() => this.props.complete(task.id)} >Complete</Button></Col>
               </Row>
             </ListGroupItem>
             )

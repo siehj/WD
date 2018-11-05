@@ -20,13 +20,14 @@ class Tasks extends React.Component {
       collapse: false,
     };
     this.toggleAllEmployeeView = this.toggleAllEmployeeView.bind(this);
+    this.setTaskComplete = this.setTaskComplete.bind(this);
   }
 
   componentDidMount() {
     
     if(this.props.status === 'Admin') {
       //if admin, get all employees and their tasks. and pool data
-      console.log(this.state.employees);
+      
       //update employees object
       //update total number of tasks
       let empsTasks = {};
@@ -53,6 +54,11 @@ class Tasks extends React.Component {
     }  
   }
 
+  setTaskComplete(taskId) {
+    console.log(taskId)
+    axios.put('/api/completeTask', {taskId : taskId})
+      .then(() => {console.log(done)});
+  }
 
   toggleAllEmployeeView() {
     this.setState({ collapse: !this.state.collapse });
@@ -77,7 +83,7 @@ class Tasks extends React.Component {
           </ListGroupItem>
           <Collapse isOpen={this.state.collapse} >
             {Object.keys(this.state.employees).map((person, i) => {
-              return <TaskCard key={i} employee={person} tasks={this.state.employees[person]} />
+              return <TaskCard key={i} employee={person} tasks={this.state.employees[person]} complete={this.setTaskComplete} />
             })}
           </Collapse>
         </ListGroup>

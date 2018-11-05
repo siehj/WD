@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroup, ListGroupItem, Badge, Collapse } from 'reactstrap';
+import { ListGroup, ListGroupItem, Badge, Collapse, Row, Col, Button } from 'reactstrap';
 
 class TaskCard extends React.Component {
   constructor(props){
@@ -10,8 +10,6 @@ class TaskCard extends React.Component {
   }
   toggleView(e) {
     this.setState({ collapse: !this.state.collapse });
-    // console.log(this.state.collapse);
-    // console.log(!this.state.collapse);
   }
   render(){
     return (
@@ -19,7 +17,18 @@ class TaskCard extends React.Component {
         <ListGroupItem onClick={this.toggleView} className="justify-content-between">{this.props.employee} <Badge pill>{this.props.tasks.length}</Badge></ListGroupItem>
         <Collapse isOpen={this.state.collapse}>
           {this.props.tasks.map((task, i) => {
-            return <ListGroupItem key={i} >{task}</ListGroupItem>
+            return (
+            <ListGroupItem key={i} className="indivTask" > 
+              <Row>
+                <Col> <em>{task.task}</em> </Col>
+                <Col > <a> {task.deadline}</a> </Col>
+                <Col> 
+                  <Button size="sm" outline color="success" >Complete</Button>
+                </Col>
+               
+              </Row>
+            </ListGroupItem>
+            )
           })}
         </Collapse>
       </ListGroup>

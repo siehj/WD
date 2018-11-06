@@ -41,7 +41,10 @@ app.get('/api/getEmployees', (req, res) => {
 app.post('/api/saveTask', (req, res) => {
   //
   // console.log(req.body.newTask);
-  db.addTask(req.body.newTask)
+  db.addTask(req.body.newTask, (err, task) => {
+    if (err) console.log(err);
+    else console.log('whaaaaa ',task);
+  })
   res.end();
 });
 

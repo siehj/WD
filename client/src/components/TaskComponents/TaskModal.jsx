@@ -27,7 +27,7 @@ class TaskModal extends React.Component {
   }
 
   updateAssigned(name) {
-    this.setState({ assignedTo: name }, () => console.log(this.state));
+    this.setState({ assignedTo: name });
   } 
 
   sendTask() {

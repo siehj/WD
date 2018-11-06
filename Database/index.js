@@ -37,6 +37,14 @@ const verifyEmployee = (data, callback) => {
   });
 }
 
+const getAllEmployees = (callback) => {
+  let qs = `SELECT name FROM employees;`;
+  con.query(qs, (err, employees) => {
+    if(err) callback(err, null);
+    else callback(null, employees);
+  });
+}
+
 // TASKS -- add, complete, get all, assign, update
 const addTask = (task, callback) => {
   let date = new Date;
@@ -93,6 +101,7 @@ module.exports = { addContact,
   completeTask, 
   assignTask,
   getAllTasks,
-  getAllUserTasks 
+  getAllUserTasks,
+  getAllEmployees 
 };
 

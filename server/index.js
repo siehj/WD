@@ -27,6 +27,17 @@ app.post('/login', (req, res) => {
   });
 });
 
+app.get('/api/getEmployees', (req, res) => {
+  db.getAllEmployees((err, employees) => { 
+    if(err) console.error;
+    else {
+      let response = [];
+      employees.map((person) => response.push(person.name));
+      res.send(response);
+    }
+  });
+});
+
 app.post('/api/saveTask', (req, res) => {
   //
   // console.log(req.body.newTask);

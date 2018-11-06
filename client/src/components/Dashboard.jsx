@@ -4,6 +4,7 @@ import Chat from './Chat.jsx';
 import TaskModal from './TaskComponents/TaskModal.jsx';
 import ContactModal from './ContactComponents/ContactModal.jsx';
 import { Button, Container, Row, Col, Badge } from 'reactstrap';
+const axios = require('axios');
 
 
 class Dashboard extends React.Component {
@@ -30,10 +31,18 @@ class Dashboard extends React.Component {
       navOpen: true,
       displayTaskModal: false,
       displayContactModal: false,
-      newMessages: []
+      newMessages: [],
+      employees: []
     }
     this.toggleModal = this.toggleModal.bind(this);
     this.submitCloseModal = this.submitCloseModal.bind(this);
+  }
+
+  componentDidMount() {
+    if(this.props.status === 'Admin') {
+      axios.get('/api/getEmployees')
+        .then(({ data }) => this.setState({ employees: data }));
+    }
   }
 
   changeScreen(e) {
@@ -123,7 +132,7 @@ class Dashboard extends React.Component {
           </nav>
           {/* MAIN PAGE */}
           <div className="container" id="main" >
-          {this.state.displayTaskModal === true ? <TaskModal status={this.state.displayTaskModal} toggleTaskModal={this.toggleModal} submit={this.submitCloseModal} /> : null }
+          {this.state.displayTaskModal === true ? <TaskModal status={this.state.displayTaskModal} toggleTaskModal={this.toggleModal} submit={this.submitCloseModal} employees={this.state.employees} /> : null }
           {this.state.displayContactModal === true ? <ContactModal status={this.state.displayContactModal} toggleContactModal={this.toggleModal} submit={this.submitCloseModal} /> : null }
           <Container>
             <Row>

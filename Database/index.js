@@ -56,7 +56,7 @@ const addTask = (task, callback) => {
     if(err) console.log(err);
     // create the task
     else {
-
+      
       let qs = `INSERT INTO tasks (task, note, completed, created, deadline, employee_id) 
       VALUES ('${task.task}', '${task.note}', '${task.completed}', '${date.toISOString().split('T')[0]}', '${deadline.toISOString().split('T')[0]}', ${task.assignedTo === 'unassigned' ? 'unassigned' : `${id[0].id}`});`;
      
@@ -71,10 +71,10 @@ const addTask = (task, callback) => {
 
 const getAllTasks = (callback) => {
   let qs = `SELECT tasks.id, tasks.task, tasks.note, tasks.completed, tasks.created, tasks.deadline, employees.username FROM tasks
-  INNER JOIN employees ON tasks.id = employees.id`;
+  INNER JOIN employees ON tasks.employee_id = employees.id`;
   con.query(qs, (err, result) => {
     if(err) callback(err, null);
-    else callback(null, result[0]);
+    else callback(null, result);
   });
 };
 

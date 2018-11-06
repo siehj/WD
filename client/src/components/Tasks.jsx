@@ -27,7 +27,8 @@ class Tasks extends React.Component {
     
     if(this.props.status === 'Admin') {
       //if admin, get all employees and their tasks. and pool data
-      
+      axios.get('/api/getAllTasks')
+        .then(({ data }) => console.log(data))
       //update employees object
       //update total number of tasks
       let empsTasks = {};
@@ -41,7 +42,7 @@ class Tasks extends React.Component {
       fakeTasks.map(task => {
         empsTasks[task.employee_id] ?  tasks[empsTasks[task.employee_id]].push(task) : null;
       });
-
+      console.log('fake data', tasks)
       this.setState({ employees : tasks }, () => {
         let total = 0;
         Object.values(this.state.employees).map(num => total += num.length);

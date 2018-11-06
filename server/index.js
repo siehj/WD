@@ -9,6 +9,7 @@ const server = http.createServer(app);
 const io = socketIo(server);
 // import { fakeData } from './fakeData.js';
 const db = require('../Database');
+const shapeData = require('../Services/Helpers/ShapeTaskData')
 // const fs = require('fs');
 
 
@@ -51,7 +52,10 @@ app.post('/api/saveTask', (req, res) => {
 app.get('/api/getAllTasks', (req, res) => {
   db.getAllTasks((err, tasks) => {
     if(err) console.error;
-    else res.send(tasks);
+    else {
+      let result = shapeData(Object.values(Object.values(tasks)));
+      res.send(result);
+    };
   });
 });
 

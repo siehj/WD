@@ -1,11 +1,11 @@
 import React from 'react';
+import TaskDropdown from './TaskDropdown.jsx';
 const axios = require('axios');
 import { 
   Button, Modal, 
   ModalHeader, ModalBody, 
-  ModalFooter, Input, InputGroupAddon, InputGroupText,
-  Label, Form, InputGroup } from 'reactstrap';
-import { ETIME } from 'constants';
+  ModalFooter, Input, 
+  Label, Form } from 'reactstrap';
 
 class TaskModal extends React.Component {
   constructor(props) {
@@ -19,11 +19,16 @@ class TaskModal extends React.Component {
     };
     this.updateTask = this.updateTask.bind(this);
     this.sendTask = this.sendTask.bind(this);
+    this.updateAssigned = this.updateAssigned.bind(this);
   }
 
   updateTask(e) {
     this.setState({ [e.target.name] : e.target.value });
   }
+
+  updateAssigned(name) {
+    this.setState({ assignedTo: name }, () => console.log(this.state));
+  } 
 
   sendTask() {
     axios.post('/api/saveTask', { newTask: this.state })
@@ -46,6 +51,9 @@ class TaskModal extends React.Component {
   
                 <Label for="date">Due Date</Label>
                 <Input type="date" name="deadline" id="exampleDate" placeholder="date placeholder" onChange={this.updateTask} />
+
+                <Label for="assignedTo" >Assign To</Label>
+                <TaskDropdown employees={this.props.employees} update={this.updateAssigned} />
             </Form>
           </ModalBody>
           <ModalFooter>

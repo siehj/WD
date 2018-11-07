@@ -33,7 +33,7 @@ app.get('/api/getEmployees', (req, res) => {
     if(err) console.error;
     else {
       let response = [];
-      employees.map((person) => response.push(person.name));
+      employees.map((person) => response.push(person.username));
       res.send(response);
     }
   });

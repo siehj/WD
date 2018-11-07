@@ -6,7 +6,6 @@ const LineGraph = (props) => {
   
   return (
     <div  >
-    {console.log(document.getElementsByClassName("lineGraph"))}
       <XYPlot height={300} width={360} stroke="#4c4d4c" >
         <XAxis bottom={0} hideLine title="months" />
         <YAxis left={0} />

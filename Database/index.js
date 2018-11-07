@@ -38,7 +38,7 @@ const verifyEmployee = (data, callback) => {
 }
 
 const getAllEmployees = (callback) => {
-  let qs = `SELECT name FROM employees;`;
+  let qs = `SELECT username FROM employees;`;
   con.query(qs, (err, employees) => {
     if(err) callback(err, null);
     else callback(null, employees);

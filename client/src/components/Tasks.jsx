@@ -28,25 +28,27 @@ class Tasks extends React.Component {
     if(this.props.status === 'Admin') {
       //if admin, get all employees and their tasks. and pool data
       axios.get('/api/getAllTasks')
-        .then(({ data }) => console.log(data))
+        .then(({ data }) => {
+          this.setState({ employees : data }, () => {
+            let total = 0;
+            Object.values(this.state.employees).map(num => total += num.length);
+            this.setState({ taskTotal : total });
+          });
+        })
       //update employees object
       //update total number of tasks
-      let empsTasks = {};
-      let tasks = {};
+      // let empsTasks = {};
+      // let tasks = {};
 
-      fakeEmployees.map(emp => {
-        empsTasks[emp.id] = emp.username;
-        tasks[emp.username] = [];
-      });
+      // fakeEmployees.map(emp => {
+      //   empsTasks[emp.id] = emp.username;
+      //   tasks[emp.username] = [];
+      // });
       
-      fakeTasks.map(task => {
-        empsTasks[task.employee_id] ?  tasks[empsTasks[task.employee_id]].push(task) : null;
-      });
-      this.setState({ employees : tasks }, () => {
-        let total = 0;
-        Object.values(this.state.employees).map(num => total += num.length);
-        this.setState({ taskTotal : total });
-      });
+      // fakeTasks.map(task => {
+      //   empsTasks[task.employee_id] ?  tasks[empsTasks[task.employee_id]].push(task) : null;
+      // });
+      
 
     } else {
       // else get this employee's info data

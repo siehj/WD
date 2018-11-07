@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Container, Row, Col, Collapse, ListGroup, ListGroupItem, Badge } from 'reactstrap';
 import TaskCard from './TaskComponents/EmployeeTaskCard.jsx';
-import { fakeTasks, fakeEmployees, fakeTaskPool } from '../../../Database/fakeData.js';
+// import { fakeTasks, fakeEmployees, fakeTaskPool } from '../../../Database/fakeData.js';
 const axios = require('axios');
 
 
@@ -21,34 +21,14 @@ class Tasks extends React.Component {
     };
     this.toggleAllEmployeeView = this.toggleAllEmployeeView.bind(this);
     this.setTaskComplete = this.setTaskComplete.bind(this);
+    this.getTasks = this.getTasks.bind(this);
   }
 
   componentDidMount() {
     
+    //if admin, get all employees and their tasks. and pool data
     if(this.props.status === 'Admin') {
-      //if admin, get all employees and their tasks. and pool data
-      axios.get('/api/getAllTasks')
-        .then(({ data }) => {
-          this.setState({ employees : data }, () => {
-            let total = 0;
-            Object.values(this.state.employees).map(num => total += num.length);
-            this.setState({ taskTotal : total });
-          });
-        })
-      //update employees object
-      //update total number of tasks
-      // let empsTasks = {};
-      // let tasks = {};
-
-      // fakeEmployees.map(emp => {
-      //   empsTasks[emp.id] = emp.username;
-      //   tasks[emp.username] = [];
-      // });
-      
-      // fakeTasks.map(task => {
-      //   empsTasks[task.employee_id] ?  tasks[empsTasks[task.employee_id]].push(task) : null;
-      // });
-      
+      this.getTasks();
 
     } else {
       // else get this employee's info data
@@ -56,10 +36,21 @@ class Tasks extends React.Component {
     }  
   }
 
+  getTasks() {
+    axios.get('/api/getAllTasks')
+      .then(({ data }) => {
+        this.setState({ employees : data }, () => {
+          let total = 0;
+          Object.values(this.state.employees).map(num => total += num.length);
+          this.setState({ taskTotal : total });
+        });
+      });
+  }
+
   setTaskComplete(taskId) {
     console.log(taskId)
     axios.put('/api/completeTask', {taskId : taskId})
-      .then(() => {console.log(done)});
+      .then(() => this.getTasks());
   }
 
   toggleAllEmployeeView() {

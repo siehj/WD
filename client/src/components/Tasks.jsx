@@ -42,7 +42,6 @@ class Tasks extends React.Component {
       fakeTasks.map(task => {
         empsTasks[task.employee_id] ?  tasks[empsTasks[task.employee_id]].push(task) : null;
       });
-      console.log('fake data', tasks)
       this.setState({ employees : tasks }, () => {
         let total = 0;
         Object.values(this.state.employees).map(num => total += num.length);

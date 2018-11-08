@@ -16,7 +16,7 @@ class Tasks extends React.Component {
         tasks: [4576, 6547, 9]
       },
       unassignedTasks: [],
-      poolTasks: [{'task1': 'unassigned'}, {'task2': 'completed'}, {'task2': 'completed'}],
+      completedTasks: [],
       taskTotal: 0,
       user: 'Sieh',
       collapse: false,
@@ -25,6 +25,7 @@ class Tasks extends React.Component {
     this.setTaskComplete = this.setTaskComplete.bind(this);
     this.getTasks = this.getTasks.bind(this);
     this.getUnassigned = this.getUnassigned.bind(this);
+    this.getCompleted = this.getCompleted.bind(this);
   }
 
   componentDidMount() {
@@ -48,7 +49,7 @@ class Tasks extends React.Component {
           this.setState({ taskTotal : total });
         });
       })
-      .then(() => this.getUnassigned())
+      .then(() => this.getUnassigned());
   }
 
   getUnassigned() {
@@ -56,6 +57,14 @@ class Tasks extends React.Component {
       .then(({ data }) => {
         this.setState({ unassignedTasks: data });
       })
+      .then(() => this.getCompleted());
+  }
+
+  getCompleted() {
+    axios.get('/api/allCompleted')
+      .then(({ data }) => {
+        this.setState({ completedTasks: data });
+      });
   }
 
   setTaskComplete(taskId) {
@@ -102,7 +111,7 @@ class Tasks extends React.Component {
           </Col>
           <Col>
             <ListGroup>
-              <OtherTaskCards card={"completed"} />
+              <OtherTaskCards completedTasks={this.state.completedTasks} card={"completed"} />
             </ListGroup>
           </Col>
         </Row>

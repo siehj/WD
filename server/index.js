@@ -89,7 +89,6 @@ app.put('/api/completeTask', (req, res) => {
       db.removeTask(req.body.taskId, (err, deleteResult) => {
         if (err) console.log(err);
         else {
-          console.log('final result ',deleteResult);
           res.end();
         }
       })
@@ -104,6 +103,12 @@ app.post('/api/assignTask', (req, res) => {
   });
 });
 
+app.get('/api/allCompleted', (req, res) => {
+  db.getCompletedTasks((err, result) => {
+    if(err) console.log(err);
+    else res.send(result);
+  })
+})
 
 
 //Whenever someone connects this gets executed

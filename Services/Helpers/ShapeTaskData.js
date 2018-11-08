@@ -6,6 +6,7 @@ const ShapeData = (EmployeeTasks) => {
   EmployeeTasks.map(task => {
     task.deadline = JSON.stringify(task.deadline).split("T")[0];
     task.created = JSON.stringify(task.created).split("T")[0];
+    task.username ? task.username : task.username = "unassigned";
     results[task.username] ? results[task.username].push(task) : results[task.username] = [task];
   });
   return results;

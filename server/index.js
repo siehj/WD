@@ -57,7 +57,7 @@ app.get('/api/allUnassigned', (req, res) => {
     else {
 
       let result = shapeData(Object.values(Object.values(unassigned)));
-      res.send(result);
+      res.send(result.unassigned);
     }
   })
 })

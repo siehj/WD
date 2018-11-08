@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Container, Row, Col, Collapse, ListGroup, ListGroupItem, Badge } from 'reactstrap';
 import TaskCard from './TaskComponents/EmployeeTaskCard.jsx';
+import OtherTaskCards from './TaskComponents/OtherTaskCards.jsx';
 // import { fakeTasks, fakeEmployees, fakeTaskPool } from '../../../Database/fakeData.js';
 const axios = require('axios');
 
@@ -14,13 +15,13 @@ class Tasks extends React.Component {
         user: 'Sieh',
         tasks: [4576, 6547, 9]
       },
-      unassignedTasks: {},
+      unassignedTasks: [],
       poolTasks: [{'task1': 'unassigned'}, {'task2': 'completed'}, {'task2': 'completed'}],
       taskTotal: 0,
       user: 'Sieh',
       collapse: false,
     };
-    this.toggleAllEmployeeView = this.toggleAllEmployeeView.bind(this);
+    this.toggleLists = this.toggleLists.bind(this);
     this.setTaskComplete = this.setTaskComplete.bind(this);
     this.getTasks = this.getTasks.bind(this);
     this.getUnassigned = this.getUnassigned.bind(this);
@@ -53,7 +54,7 @@ class Tasks extends React.Component {
   getUnassigned() {
     axios.get('/api/allUnassigned')
       .then(({ data }) => {
-        this.setState({ unassignedTasks: data }, () => console.log(this.state.unassignedTasks));
+        this.setState({ unassignedTasks: data });
       })
   }
 
@@ -62,7 +63,7 @@ class Tasks extends React.Component {
       .then(() => this.getTasks());
   }
 
-  toggleAllEmployeeView() {
+  toggleLists() {
     this.setState({ collapse: !this.state.collapse });
   }
 
@@ -80,7 +81,7 @@ class Tasks extends React.Component {
       <div className="miniMain" >
       {this.props.status === 'Admin' ?
         <ListGroup>
-          <ListGroupItem onClick={this.toggleAllEmployeeView} className="allTasks" >
+          <ListGroupItem onClick={this.toggleLists} className="allTasks" >
             <a style={{ fontSize: '20px' }} > All Assigned Tasks </a> <Badge color="success" pill>{this.state.taskTotal}</Badge>
           </ListGroupItem>
           <Collapse isOpen={this.state.collapse} >
@@ -97,13 +98,11 @@ class Tasks extends React.Component {
       <div style={{ paddingTop: '10px'}} >
         <Row className="text-center">
           <Col>
-            <ListGroup>
-              <ListGroupItem className="allTasks" > Unassigned </ListGroupItem>
-            </ListGroup>
+            <OtherTaskCards unassignedTasks={this.state.unassignedTasks} card={"unassigned"} />
           </Col>
           <Col>
             <ListGroup>
-              <ListGroupItem className="allTasks" > Completed </ListGroupItem>
+              <OtherTaskCards card={"completed"} />
             </ListGroup>
           </Col>
         </Row>

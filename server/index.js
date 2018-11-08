@@ -40,24 +40,33 @@ app.get('/api/getEmployees', (req, res) => {
 });
 
 app.post('/api/saveTask', (req, res) => {
-  //
+  
   // console.log(req.body.newTask);
   let newTask = req.body.newTask;
-  if ( newTask.completed === true ) {
-    console.log('completed', newTask.completed);
-    
-  } else {
+
   db.addTask(newTask, (err, task) => {
     if (err) console.log(err);
     else res.end();
   })
-  }
+  
 });
+
+app.get('/api/allUnassigned', (req, res) => {
+  db.getUnassigned((err, unassigned) => {
+    if(err) console.log(err);
+    else {
+
+      let result = shapeData(Object.values(Object.values(unassigned)));
+      res.send(result);
+    }
+  })
+})
 
 app.get('/api/getAllTasks', (req, res) => {
   db.getAllTasks((err, tasks) => {
     if(err) console.error;
     else {
+
       let result = shapeData(Object.values(Object.values(tasks)));
       res.send(result);
     };

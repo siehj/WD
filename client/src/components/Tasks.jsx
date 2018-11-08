@@ -14,6 +14,7 @@ class Tasks extends React.Component {
         user: 'Sieh',
         tasks: [4576, 6547, 9]
       },
+      unassignedTasks: {},
       poolTasks: [{'task1': 'unassigned'}, {'task2': 'completed'}, {'task2': 'completed'}],
       taskTotal: 0,
       user: 'Sieh',
@@ -22,6 +23,7 @@ class Tasks extends React.Component {
     this.toggleAllEmployeeView = this.toggleAllEmployeeView.bind(this);
     this.setTaskComplete = this.setTaskComplete.bind(this);
     this.getTasks = this.getTasks.bind(this);
+    this.getUnassigned = this.getUnassigned.bind(this);
   }
 
   componentDidMount() {
@@ -44,7 +46,15 @@ class Tasks extends React.Component {
           Object.values(this.state.employees).map(num => total += num.length);
           this.setState({ taskTotal : total });
         });
-      });
+      })
+      .then(() => this.getUnassigned())
+  }
+
+  getUnassigned() {
+    axios.get('/api/allUnassigned')
+      .then(({ data }) => {
+        this.setState({ unassignedTasks: data }, () => console.log(this.state.unassignedTasks));
+      })
   }
 
   setTaskComplete(taskId) {

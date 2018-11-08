@@ -81,11 +81,20 @@ app.get('/api/getUserTasks', (req, res) => {
 });
 
 app.put('/api/completeTask', (req, res) => {
-  console.log(req.body);
-  // db.completeTask(req.body.taskId, (err, result) => {
-  //   if(err) console.error;
-  //   else res.end();
-  // });
+
+  db.completeTask(req.body.taskId, (err, result) => {
+    if(err) console.log(err);
+    // else res.end();
+    else {
+      db.removeTask(req.body.taskId, (err, deleteResult) => {
+        if (err) console.log(err);
+        else {
+          console.log('final result ',deleteResult);
+          res.end();
+        }
+      })
+    }
+  });
 });
 
 app.post('/api/assignTask', (req, res) => {

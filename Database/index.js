@@ -114,13 +114,34 @@ const assignTask = (taskId, user, callback) => {
 };
 
 const completeTask = (taskId, callback) => {
-  let qs = `UPDATE tasks SET completed=1 WHERE id='${taskId}';`;
-  con.query(qs, (err, result) => {
+
+  // get the task at the id, take it's info (text, note, employee_id) *set completedDate
+
+  let getTask = `SELECT * FROM tasks WHERE id=${taskId};`;
+  con.query(getTask, (err, completedTask) => {
     if (err) callback(err, null);
-    else callback(null, result[0]);
-  });
+    else {
+      let task = completedTask[0];
+      let date = new Date;
+
+      let complete = `INSERT INTO completedTasks (task, note, completeDate, employee_id) 
+      VALUES ('${task.task}', '${task.note}', '${date.toISOString().split('T')[0]}', '${task.employee_id}');`;
+
+      con.query(complete, (err, result) => {
+        if (err) callback(err, null);
+        else callback(null, result);
+      })
+    }
+  })
 };
 
+const removeTask = (taskId, callback) => {
+  let qs = `DELETE FROM tasks WHERE id=${taskId};`;
+  con.query(qs, (err, result) => {
+    if (err) callback(err, null);
+    else callback(null, result);
+  })
+}
 
 
 
@@ -132,6 +153,7 @@ module.exports = { addContact,
   getAllTasks,
   getAllUserTasks,
   getAllEmployees,
-  getUnassigned 
+  getUnassigned,
+  removeTask
 };
 

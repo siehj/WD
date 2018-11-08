@@ -41,19 +41,16 @@ class OtherTaskCards extends React.Component {
       <ListGroup>
         <ListGroupItem className="allTasks" onClick={this.toggleView}> Completed </ListGroupItem>
         <Collapse isOpen={this.state.collapse} >
-        <ListGroupItem>1</ListGroupItem>
-        <ListGroupItem>1</ListGroupItem>
-        <ListGroupItem>1</ListGroupItem>
-          {/* {this.props.unassignedTasks.map((task, i) => {
+          {this.props.completedTasks.map((task, i) => {
             return (     
-              <ListGroupItem key={i} className="unassignedTask" > 
+              <ListGroupItem key={i} className="completedTask" > 
               <Row>
                 <Col>Task: <em >{task.task}</em></Col>
-                <Col> Deadline: <a style={{ color: 'red' }}> {task.deadline}</a></Col>
+                <Col> Completed: <a> {task.completeDate.split('T')[0]}</a></Col>
               </Row>
             </ListGroupItem>
             )
-          })} */}
+          })}
         </Collapse>
       </ListGroup>
       )

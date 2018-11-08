@@ -17,13 +17,31 @@ con.connect((err) => {
 });
 
 // CONTACTS -- add, remove, update, get all
-const addContact = (data, callback) => {
-  let qs = ``;
+const addContact = (contactInfo, callback) => {
+  let qs = `INSERT INTO contacts (name, company, phone, email) VALUES ('${contactInfo.name}', '${contactInfo.company}', '${contactInfo.phone}', '${contactInfo.email}');`;
   con.query(qs, (err, result) => {
     if(err) console.log(err);
     else callback(null, result)
   })
 };
+
+const getAllContacts = (callback) => {
+  let qs = `SELECT * FROM contacts;`;
+  con.query(qs, (err, result) => {
+    if(err) console.log(err);
+    else callback(null, result);
+  })
+};
+
+const searchContacts = (query, callback) => {
+  let qs = `SELECT * FROM contacts WHERE name LIKE ${query} OR company LIKE ${query} OR phone LIKE ${query} OR email LIKE ${query};`;
+  con.query(qs, (err, result) => {
+    if(err) console.log(err);
+    else callback(null, result);
+  })
+};
+
+
 
 // EMPLOYEES -- add, remove update, get all
 const verifyEmployee = (data, callback) => {
@@ -44,6 +62,9 @@ const getAllEmployees = (callback) => {
     else callback(null, employees);
   });
 }
+
+
+
 
 // TASKS -- add, complete, get all, assign, update
 const addTask = (task, callback) => {
@@ -159,11 +180,13 @@ module.exports = { addContact,
   addTask, 
   completeTask, 
   assignTask,
+  getAllContacts,
   getAllTasks,
   getAllUserTasks,
   getAllEmployees,
   getCompletedTasks,
   getUnassigned,
-  removeTask
+  removeTask,
+  searchContacts
 };
 

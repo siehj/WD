@@ -111,6 +111,23 @@ app.get('/api/allCompleted', (req, res) => {
 })
 
 
+
+// CONTACTS
+
+app.post('/api/addContact', (req, res) => {
+  let newContact = req.body.newContact;
+  db.addContact(newContact, (err, result) => {
+    if(err) console.log(err);
+    else res.end();
+  })
+});
+
+app.get('/api/getContacts', (req, res) => {
+
+});
+
+
+
 //Whenever someone connects this gets executed
 io.on('connection', (socket) => {
   console.log('A user connected', socket.id);

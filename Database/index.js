@@ -50,23 +50,42 @@ const addTask = (task, callback) => {
   let date = new Date;
   let deadline = new Date(task.deadline);
 
-  // get the id for the user 
-  let getId = `SELECT id FROM employees WHERE username='${task.assignedTo}';`;
-  con.query(getId, (err, id) => {
-    if(err) console.log(err);
-    // create the task
-    else {
-      
-      let qs = `INSERT INTO tasks (task, note, completed, created, deadline, employee_id) 
-      VALUES ('${task.task}', '${task.note}', '${task.completed}', '${date.toISOString().split('T')[0]}', '${deadline.toISOString().split('T')[0]}', ${task.assignedTo === 'unassigned' ? 'unassigned' : `${id[0].id}`});`;
+  if (task.assignedTo === 'unassigned') {
+    let qs = `INSERT INTO tasks (task, note, completed, created, deadline) 
+      VALUES ('${task.task}', '${task.note}', '${task.completed}', '${date.toISOString().split('T')[0]}', '${deadline.toISOString().split('T')[0]}');`;
      
       con.query(qs, (err, result) => {
         if(err) console.log(err);
         else callback(null, result);
       });
-    }
-  });
+  } else {
+    // get the id for the user 
+    let getId = `SELECT id FROM employees WHERE username='${task.assignedTo}';`;
+   
+    con.query(getId, (err, id) => {
+      if(err) console.log(err);
+      // create the task
+      else {
+        
+        let qs = `INSERT INTO tasks (task, note, completed, created, deadline, employee_id) 
+        VALUES ('${task.task}', '${task.note}', '${task.completed}', '${date.toISOString().split('T')[0]}', '${deadline.toISOString().split('T')[0]}', '${id[0].id}' );`;
+        
+        con.query(qs, (err, result) => {
+          if(err) console.log(err);
+          else callback(null, result);
+        });
+      }
+    });
+  }
 
+};
+
+const getUnassigned = (callback) => {
+  let qs = `SELECT * FROM tasks WHERE employee_id IS NULL;`;
+  con.query(qs, (err, unassigned) => {
+    if(err) callback(err, null);
+    else callback(null, unassigned);
+  })
 };
 
 const getAllTasks = (callback) => {
@@ -112,6 +131,7 @@ module.exports = { addContact,
   assignTask,
   getAllTasks,
   getAllUserTasks,
-  getAllEmployees 
+  getAllEmployees,
+  getUnassigned 
 };
 

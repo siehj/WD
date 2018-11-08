@@ -48,7 +48,6 @@ class Tasks extends React.Component {
   }
 
   setTaskComplete(taskId) {
-    console.log(taskId)
     axios.put('/api/completeTask', {taskId : taskId})
       .then(() => this.getTasks());
   }

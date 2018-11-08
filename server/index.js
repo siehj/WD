@@ -42,11 +42,16 @@ app.get('/api/getEmployees', (req, res) => {
 app.post('/api/saveTask', (req, res) => {
   //
   // console.log(req.body.newTask);
-  db.addTask(req.body.newTask, (err, task) => {
+  let newTask = req.body.newTask;
+  if (newTask.assignedTo === 'unassigned' || newTask.completed === true ) {
+    console.log('assigned to', newTask.assignedTo);
+    console.log('completed', newTask.completed);
+  } else {
+  db.addTask(newTask, (err, task) => {
     if (err) console.log(err);
-    else console.log('whaaaaa ',task);
+    else res.end();
   })
-  res.end();
+  }
 });
 
 app.get('/api/getAllTasks', (req, res) => {

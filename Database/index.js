@@ -143,6 +143,15 @@ const removeTask = (taskId, callback) => {
   })
 }
 
+const getCompletedTasks = (callback) => {
+  let qs = `SELECT completedTasks.id, completedTasks.task, completedTasks.note, completedTasks.completeDate, employees.username FROM completedTasks
+  INNER JOIN employees ON completedTasks.employee_id = employees.id;`;
+  con.query(qs, (err, result) => {
+    if (err) callback(err, null);
+    else callback(null, result);
+  })
+}
+
 
 
 module.exports = { addContact, 
@@ -153,6 +162,7 @@ module.exports = { addContact,
   getAllTasks,
   getAllUserTasks,
   getAllEmployees,
+  getCompletedTasks,
   getUnassigned,
   removeTask
 };

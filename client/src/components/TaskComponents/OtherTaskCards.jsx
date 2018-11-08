@@ -20,7 +20,10 @@ class OtherTaskCards extends React.Component {
 
       return (
         <ListGroup>
-        <ListGroupItem className="allTasks" onClick={this.toggleView}> Unassigned </ListGroupItem>
+        <ListGroupItem className="allTasks" onClick={this.toggleView}> <a>Unassigned </a>
+          
+          <Badge >{this.props.unassignedTasks.length}</Badge>  
+        </ListGroupItem>
         <Collapse isOpen={this.state.collapse} >
         
           {this.props.unassignedTasks.map((task, i) => {
@@ -39,7 +42,10 @@ class OtherTaskCards extends React.Component {
     } else {
       return (
       <ListGroup>
-        <ListGroupItem className="allTasks" onClick={this.toggleView}> Completed </ListGroupItem>
+        <ListGroupItem className="allTasks" onClick={this.toggleView}> 
+          <a>Completed </a>
+          <Badge >{this.props.completedTasks.length}</Badge>  
+        </ListGroupItem>
         <Collapse isOpen={this.state.collapse} >
           {this.props.completedTasks.map((task, i) => {
             return (     

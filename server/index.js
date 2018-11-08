@@ -123,7 +123,10 @@ app.post('/api/addContact', (req, res) => {
 });
 
 app.get('/api/getContacts', (req, res) => {
-
+  db.getAllContacts((err, contacts) => {
+    if(err) console.log(err);
+    else res.send(contacts)
+  })
 });
 
 

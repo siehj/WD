@@ -1,4 +1,5 @@
 import React from 'react';
+const axios = require('axios');
 import { Button, Container, Row, Col, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon, InputGroupButtonDropdown, DropdownToggle, DropdownMenu } from 'reactstrap';
 import SearchDropdown from './ContactComponents/SearchDropdown.jsx';
 
@@ -6,15 +7,25 @@ class Contacts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dropdownOpen: false
+      dropdownOpen: false,
+      allContacts: [],
+      query: '',
+      searchedContact: []
     };
     this.toggleDropDown = this.toggleDropDown.bind(this);
   }
+  
+  componentDidMount() {
+    axios.get('/api/getContacts')
+      .then(({ data }) => console.log(data))
+  }
+  
   toggleDropDown() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
   }
+
 
 
   render() {

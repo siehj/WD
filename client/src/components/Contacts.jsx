@@ -11,7 +11,8 @@ class Contacts extends React.Component {
       query: '',
       searchedContact: []
     };
-    this.toggleDropDown = this.toggleDropDown.bind(this);
+    this.updateQuery = this.updateQuery.bind(this);
+    this.searchContact = this.searchContact.bind(this);
   }
   
   componentDidMount() {
@@ -19,13 +20,15 @@ class Contacts extends React.Component {
       .then(({ data }) => this.setState({ searchedContact: data }));
   }
   
-  toggleDropDown() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
-    });
+  updateQuery(e) {
+    this.setState({ query: e.target.value });
   }
 
-
+  searchContact() {
+    axios.post('/api/searchContacts', { query: this.state.query })
+      .then(({ data }) => this.setState({ searchedContact: data }))
+      .then(() => this.setState({ query: '' }));
+  }
 
   render() {
     return (
@@ -41,8 +44,10 @@ class Contacts extends React.Component {
           <FormGroup className="text-center" >
             <Label>Search</Label>
               <InputGroup >
-                <Input type="text" name="ReportQuery" id="ReportQuery"/>
-                <InputGroupAddon addonType="append"><Button outline color="secondary" type="button" id="QueryBtn" size="sm" >Submit</Button></InputGroupAddon>
+                <Input type="text" name="ReportQuery" id="ReportQuery" placeholder={this.state.query} onChange={this.updateQuery} />
+                <InputGroupAddon addonType="append">
+                  <Button outline color="secondary" type="button" id="QueryBtn" size="sm" onClick={this.searchContact} >Submit</Button>
+                </InputGroupAddon>
               </InputGroup>
           </FormGroup>
         </Form>

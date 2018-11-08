@@ -34,7 +34,7 @@ const getAllContacts = (callback) => {
 };
 
 const searchContacts = (query, callback) => {
-  let qs = `SELECT * FROM contacts WHERE name LIKE ${query} OR company LIKE ${query} OR phone LIKE ${query} OR email LIKE ${query};`;
+  let qs = `SELECT * FROM contacts WHERE name LIKE '%${query}%' OR company LIKE '%${query}%' OR phone LIKE '%${query}%' OR email LIKE '%${query}%';`;
   con.query(qs, (err, result) => {
     if(err) console.log(err);
     else callback(null, result);

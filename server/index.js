@@ -129,6 +129,14 @@ app.get('/api/getContacts', (req, res) => {
   })
 });
 
+app.post('/api/searchContacts', (req, res) => {
+  db.searchContacts(req.body.query, (err, contacts) => {
+    if(err) console.log(err);
+    else {
+      res.send(contacts);
+    }
+  });
+});
 
 
 //Whenever someone connects this gets executed

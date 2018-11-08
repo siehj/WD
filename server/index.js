@@ -43,9 +43,9 @@ app.post('/api/saveTask', (req, res) => {
   //
   // console.log(req.body.newTask);
   let newTask = req.body.newTask;
-  if (newTask.assignedTo === 'unassigned' || newTask.completed === true ) {
-    console.log('assigned to', newTask.assignedTo);
+  if ( newTask.completed === true ) {
     console.log('completed', newTask.completed);
+    
   } else {
   db.addTask(newTask, (err, task) => {
     if (err) console.log(err);

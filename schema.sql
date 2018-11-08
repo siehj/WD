@@ -53,5 +53,17 @@ CREATE TABLE contacts (
   FOREIGN KEY (type_id) REFERENCES companyType(id)
 );
 
+CREATE TABLE pool (
+  id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  task text, 
+  note varchar(200), 
+  completed BOOLEAN,
+  created datetime,
+  deadline datetime,
+  priority int,
+  employee_id int,
+  FOREIGN KEY (employee_id) REFERENCES employees(id)
+);
+
 
 

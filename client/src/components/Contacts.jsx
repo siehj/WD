@@ -7,12 +7,12 @@ class Contacts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dropdownOpen: false,
       query: '',
-      searchedContact: []
+      searchedContact: [],
     };
     this.updateQuery = this.updateQuery.bind(this);
     this.searchContact = this.searchContact.bind(this);
+    this.sendContactUpdate = this.sendContactUpdate.bind(this);
   }
   
   componentDidMount() {
@@ -28,6 +28,10 @@ class Contacts extends React.Component {
     axios.post('/api/searchContacts', { query: this.state.query })
       .then(({ data }) => this.setState({ searchedContact: data }))
       .then(() => this.setState({ query: '' }));
+  }
+
+  sendContactUpdate(contact) {
+    console.log(contact);
   }
 
   render() {
@@ -55,7 +59,7 @@ class Contacts extends React.Component {
         <div className="contactResults">
           {
             this.state.searchedContact.map((contact, i) => {
-              return <SearchResults key={i} contact={contact} />
+              return <SearchResults key={i} contact={contact} sendContactUpdate={this.sendContactUpdate} />
             })
           }
         </div>

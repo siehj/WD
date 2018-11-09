@@ -1,5 +1,6 @@
 import React from 'react';
-import { Table, Button, Input } from 'reactstrap';
+import { Table, Button, Input, Row, Col } from 'reactstrap';
+import RowGenerator from './RowGenerator.jsx';
 
 class AcctAudit extends React.Component {
   constructor(props) {
@@ -17,9 +18,18 @@ class AcctAudit extends React.Component {
       Paid: 0,
       Total: 0,
       NumberOfCols: 0,
-      NumberOfRows: 0
+      NumberOfRows: 1
     };
     this.showOption = this.showOption.bind(this);
+    this.addRow = this.addRow.bind(this);
+  }
+
+  componentDidMount() {
+
+  }
+
+  addRow() {
+    this.setState({ NumberOfRows : this.state.NumberOfRows+1 });
   }
 
   showOption(e) {
@@ -29,7 +39,7 @@ class AcctAudit extends React.Component {
   render() {
     return (
       <div>
-        <Table>
+        <Table striped >
           <thead>
             <tr>
               <th>Date</th>
@@ -44,15 +54,21 @@ class AcctAudit extends React.Component {
               { this.state.secondaryOption ? <th>Total</th> : null }
             </tr>
           </thead>
-
+          <RowGenerator num={this.state.NumberOfRows} sec={this.state.secondaryOption} off={this.state.officeOptions} />
         </Table>
         <div>
-          <Button color="success" size="sm" >Add Row</Button>
-          <Button color="secondary" size="sm" name="officeOptions" onClick={this.showOption} >Office Options</Button>
-          <Button color="secondary" size="sm" name="secondaryOptions" onClick={this.showOption} >Secondary Options</Button>
+          <Button color="success" onClick={this.addRow} >Add Row</Button>
         </div>
         <div>
-          <Button name="" outline color="secondary" block >Export</Button>
+          <Row style={{ marginTop: '10px', marginBottom: '10px' }} >
+            <Col>
+              <Button outline color="secondary" block name="officeOptions" onClick={this.showOption} >Office Options</Button>
+            </Col>  
+            <Col>
+              <Button outline color="secondary" block name="secondaryOptions" onClick={this.showOption} >Secondary Options</Button>
+            </Col>  
+          </Row>
+          <Button name="" outline color="secondary" block >Export As Excel</Button>
           <Button name="" outline color="success" block onClick={this.props.goBack} >Go Back</Button>
         </div>
       </div>

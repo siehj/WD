@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import ARTool from './AccountComponents/AgingReportTool.jsx';
 import BillingTool from './AccountComponents/BillingTool.jsx';
-import AccountAuditTool from './AccountComponents/AuditTools.jsx';
+import AccountAuditTool from './AccountComponents/AcctTools.jsx';
 
 class Accounts extends React.Component {
   constructor(props) {

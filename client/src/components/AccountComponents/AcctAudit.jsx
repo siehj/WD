@@ -22,9 +22,14 @@ class AcctAudit extends React.Component {
     };
     this.showOption = this.showOption.bind(this);
     this.addRow = this.addRow.bind(this);
+    this.calculate = this.calculate.bind(this);
   }
 
   componentDidMount() {
+
+  }
+  
+  calculate(obj) {
 
   }
 
@@ -44,7 +49,7 @@ class AcctAudit extends React.Component {
             <tr>
               <th>Date</th>
               { this.state.officeOptions ? <th>Office Fee</th> : null }
-              { this.state.officeOptions ? <th>Allowed</th> : null }
+              <th>Allowed</th>
               { this.state.officeOptions ? <th>Write Off</th> : null }
               <th>Primary</th>
               <th>PP</th>
@@ -55,6 +60,20 @@ class AcctAudit extends React.Component {
             </tr>
           </thead>
           <RowGenerator num={this.state.NumberOfRows} sec={this.state.secondaryOption} off={this.state.officeOptions} />
+          <thead>
+            <tr style={{ fontSize: '15px' }} >
+              <th></th>
+              { this.state.officeOptions ? <th>{this.state.OF.toFixed(2)}</th> : null }
+              <th>{this.state.Allowed.toFixed(2)}</th>
+              { this.state.officeOptions ? <th>{this.state.WO.toFixed(2)}</th> : null }
+              <th>{this.state.Primary.toFixed(2)}</th>
+              <th>{this.state.PP.toFixed(2)}</th>
+              <th>{this.state.Paid.toFixed(2)}</th>
+              { this.state.secondaryOption ? null : <th>{this.state.Total.toFixed(2)}</th> }
+              { this.state.secondaryOption ? <th>{this.state.SecIns.toFixed(2)}</th> : null }
+              { this.state.secondaryOption ? <th>{this.state.NewTotal.toFixed(2)}</th> : null }
+            </tr>
+          </thead>
         </Table>
         <div>
           <Button color="success" onClick={this.addRow} >Add Row</Button>

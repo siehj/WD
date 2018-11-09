@@ -53,9 +53,9 @@ class AcctAudit extends React.Component {
               { this.state.officeOptions ? <th>Write Off</th> : null }
               <th>Primary</th>
               <th>PP</th>
-              <th>Paid</th>
               { this.state.secondaryOption ? null : <th>Total</th> }
               { this.state.secondaryOption ? <th>Secondary</th> : null }
+              <th>Paid</th>
               { this.state.secondaryOption ? <th>Total</th> : null }
             </tr>
           </thead>
@@ -68,9 +68,9 @@ class AcctAudit extends React.Component {
               { this.state.officeOptions ? <th>{this.state.WO.toFixed(2)}</th> : null }
               <th>{this.state.Primary.toFixed(2)}</th>
               <th>{this.state.PP.toFixed(2)}</th>
-              <th>{this.state.Paid.toFixed(2)}</th>
               { this.state.secondaryOption ? null : <th>{this.state.Total.toFixed(2)}</th> }
               { this.state.secondaryOption ? <th>{this.state.SecIns.toFixed(2)}</th> : null }
+              <th>{this.state.Paid.toFixed(2)}</th>
               { this.state.secondaryOption ? <th>{this.state.NewTotal.toFixed(2)}</th> : null }
             </tr>
           </thead>

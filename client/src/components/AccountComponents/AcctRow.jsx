@@ -63,9 +63,9 @@ class AcctRow extends React.Component {
       { this.props.off ? <td name="WO" className="text-center"><h6>{this.state.WO.toFixed(2)}</h6></td> : null }
       <td> <Input name="Primary" placeholder="0.00" onChange={this.changeValue}/></td>
       <td name="PP" className="text-center"> <h6>{this.state.PP.toFixed(2)}</h6></td>
-      { this.props.sec ? null : <td name="Total" className="text-center"><h6>{this.state.Total.toFixed(2)}</h6></td> }
       { this.props.sec ? <td><Input name="SecIns" placeholder="0.00" onChange={this.changeValue}/></td> : null }
       <td> <Input name="Paid" placeholder="0.00" onChange={this.changeValue}/></td>
+      { this.props.sec ? null : <td name="Total" className="text-center"><h6>{this.state.Total.toFixed(2)}</h6></td> }
       { this.props.sec ? <td name="NewTotal"className="text-center"><h6>{this.state.NewTotal.toFixed(2)}</h6></td> : null }
     </tr>
     )

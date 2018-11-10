@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'reactstrap';
 import ARTool from './AccountComponents/AgingReportTool.jsx';
 import BillingTool from './AccountComponents/BillingTool.jsx';
 import AccountAuditTool from './AccountComponents/AcctTools.jsx';
+const axios = require('axios');
 
 class Accounts extends React.Component {
   constructor(props) {
@@ -10,12 +11,19 @@ class Accounts extends React.Component {
     this.state = {
       miniScreen : 'Audit',
       index: 0,
-      agingReportData: []
+      agingReportData: [],
+      acctsForAudits: [],
+      billingAccts: [],
+      date: '' 
     };
     this.changeMiniScreen = this.changeMiniScreen.bind(this);
+    this.getGoogleAR = this.getGoogleAR.bind(this);
   }
 
   componentDidMount() {
+    let today = new Date().toString();
+    console.log(typeof today);
+    this.setState({ date: today }, () => console.log(this.state.date));
     // this.setState({ miniScreen: this.props.accounts[0]})
   }
 
@@ -23,6 +31,12 @@ class Accounts extends React.Component {
     this.setState({ index: e.target.target });
     this.setState({ miniScreen: e.target.title });
   }
+
+  getGoogleAR() {
+
+  }
+
+
 
   render() {
     return (
@@ -38,7 +52,7 @@ class Accounts extends React.Component {
         </Container>
         <div className="miniMain" >
           {this.state.miniScreen === 'Audit' ? <AccountAuditTool/> : 
-          this.state.miniScreen === 'A/R' ? <ARTool/> : <BillingTool/> }
+          this.state.miniScreen === 'A/R' ? <ARTool getGoogleAR={this.getGoogleAR} /> : <BillingTool/> }
         </div>
       </div>
     )

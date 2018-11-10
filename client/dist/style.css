@@ -190,3 +190,7 @@ form label {
   padding: 2px;
   height: 20px;
 }
+
+#FileBrowser {
+  cursor: pointer;
+}

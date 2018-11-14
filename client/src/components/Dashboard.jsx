@@ -91,7 +91,7 @@ class Dashboard extends React.Component {
                   if (option !== this.state.currScreen) {
                     return (
                       <li key={i} >
-                        <a className="text-center" name={option} style={{ fontSize: '18px' }} onClick={this.changeScreen.bind(this)} >{option}</a>
+                        <a className="text-center" name={option} onClick={this.changeScreen.bind(this)} >{option}</a>
                       </li>
                     )
                   }
@@ -101,7 +101,7 @@ class Dashboard extends React.Component {
                   if (option !== this.state.currScreen) {
                     return (
                       <li key={i} >
-                        <a className="text-center" name={option} style={{ fontSize: '18px' }} onClick={this.changeScreen.bind(this)} >{option}</a>
+                        <a className="text-center" name={option} onClick={this.changeScreen.bind(this)} >{option}</a>
                       </li>
                     )
                   }

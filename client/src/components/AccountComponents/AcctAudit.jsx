@@ -17,24 +17,48 @@ class AcctAudit extends React.Component {
       PP: 0, 
       Paid: 0,
       Total: 0,
-      NumberOfCols: 0,
-      NumberOfRows: 1
+      NumberOfRows: 1,
+      table: [{ 0: {}}]
     };
     this.showOption = this.showOption.bind(this);
     this.addRow = this.addRow.bind(this);
     this.calculate = this.calculate.bind(this);
+    this.updateTableRow = this.updateTableRow.bind(this);
   }
 
-  componentDidMount() {
-
+  componentWillUpdate() {
   }
   
-  calculate(obj) {
+  calculate() {
+    
+    // calculate totals at the bottom of the table
+    this.state.table.map(rows => {
+      Object.keys(rows).map(col => {
+  
+        let val = this.state[`${col}`];
+        let newVal = 0;
+        if (val !== undefined) {
+          newVal = (Number(val) + Number(rows[col])); 
+          this.setState({ [`${col}`] : newVal }, () => console.log(this.state))
+        }
+      })
+    });
+  }
 
+  updateTableRow(rowNum, updatedRow) {
+    let updatedTable = this.state.table;
+    updatedTable[rowNum] = updatedRow;
+    this.setState({ table : updatedTable })
   }
 
   addRow() {
-    this.setState({ NumberOfRows : this.state.NumberOfRows+1 });
+    this.setState({ NumberOfRows : this.state.NumberOfRows+1 }, () => {
+      let table = this.state.table;
+      let newRow = {};
+      newRow[this.state.NumberOfRows-1] = {};
+      table.push(newRow);
+      this.setState({ table : table });
+    });
   }
 
   showOption(e) {
@@ -59,10 +83,10 @@ class AcctAudit extends React.Component {
               { this.state.secondaryOption ? <th>Total</th> : null }
             </tr>
           </thead>
-          <RowGenerator num={this.state.NumberOfRows} sec={this.state.secondaryOption} off={this.state.officeOptions} />
+          <RowGenerator num={this.state.NumberOfRows} sec={this.state.secondaryOption} off={this.state.officeOptions} updateTable={this.updateTableRow} />
           <thead>
             <tr style={{ fontSize: '15px' }} >
-              <th></th>
+              <th><em style={{ cursor: 'pointer', color: 'green' }} onClick={this.calculate} >Calculate</em></th>
               { this.state.officeOptions ? <th>{this.state.OF.toFixed(2)}</th> : null }
               <th>{this.state.Allowed.toFixed(2)}</th>
               { this.state.officeOptions ? <th>{this.state.WO.toFixed(2)}</th> : null }

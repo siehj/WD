@@ -43,12 +43,21 @@ class AcctRow extends React.Component {
       // pp - paid = total
       let Paid = this.state.Paid;
       let Calc = this.state.PP - Paid;
+      
+      //set total state
       this.setState({ Total : Calc }, () => {
+        //calculate secondary
         if (this.props.sec) {
           let preTotal = this.state.Total;
           let Sec = this.state.SecIns;
           let NewCalc = preTotal - Sec;
-          this.setState({ NewTotal: NewCalc });
+          this.setState({ NewTotal: NewCalc }, () => {
+            // Update the table in AcctAudit
+            this.props.updateTable(this.props.name, this.state);
+          });
+        } else {
+            // Update the table in Account Audit
+          this.props.updateTable(this.props.name, this.state);
         }
       });
     });
@@ -57,7 +66,7 @@ class AcctRow extends React.Component {
   render() {
    return ( 
     <tr>
-      <td><Input name="DOS" placeholder="DOS" /></td>
+      <td><Input name="DOS" placeholder="DOS" onChange={(e) => this.setState({ DOS: e.target.value })} /></td>
       { this.props.off ? <td> <Input name="OF" placeholder="0.00" onChange={this.changeValue}/> </td> : null }
       <td> <Input name="Allowed" placeholder="0.00" onChange={this.changeValue}/> </td> 
       { this.props.off ? <td name="WO" className="text-center"><h6>{this.state.WO.toFixed(2)}</h6></td> : null }

@@ -2,21 +2,26 @@ require('dotenv').config();
 const axios = require('axios');
 const bodyParser = require('body-parser');
 const express = require('express');
+var bcrypt = require('bcrypt-nodejs');
+var sessions = require('express-session');
 const app = express();
 const http = require('http');
 const socketIo = require('socket.io');
 const server = http.createServer(app);
 const io = socketIo(server);
-// import { fakeData } from './fakeData.js';
 const db = require('../Database');
-const shapeData = require('../Services/Helpers/ShapeTaskData')
-// const fs = require('fs');
+const shapeData = require('../Services/Helpers/ShapeTaskData');
+
 
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(sessions({ secret: process.env.SECRET, resave: false, saveUninitialized: true }));
 
+const users = {
+
+}
 
 app.post('/login', (req, res) => {
   

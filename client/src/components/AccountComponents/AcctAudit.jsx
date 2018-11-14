@@ -26,20 +26,26 @@ class AcctAudit extends React.Component {
     this.updateTableRow = this.updateTableRow.bind(this);
   }
 
-  componentWillUpdate() {
-  }
-  
   calculate() {
-    
+    this.setState({ SecIns: 0,
+      NewTotal: 0,
+      OF: 0, 
+      Allowed: 0, 
+      WO: 0, 
+      Primary: 0, 
+      PP: 0, 
+      Paid: 0,
+      Total: 0 })
     // calculate totals at the bottom of the table
     this.state.table.map(rows => {
       Object.keys(rows).map(col => {
-  
+        // val is the current state value at the col provided
         let val = this.state[`${col}`];
         let newVal = 0;
+        // if this is not undefined (like the DOS), then add the current state to the passed in value
         if (val !== undefined) {
           newVal = (Number(val) + Number(rows[col])); 
-          this.setState({ [`${col}`] : newVal }, () => console.log(this.state))
+          this.setState({ [`${col}`] : newVal });
         }
       })
     });
@@ -48,7 +54,7 @@ class AcctAudit extends React.Component {
   updateTableRow(rowNum, updatedRow) {
     let updatedTable = this.state.table;
     updatedTable[rowNum] = updatedRow;
-    this.setState({ table : updatedTable })
+    this.setState({ table : updatedTable });
   }
 
   addRow() {
@@ -57,7 +63,7 @@ class AcctAudit extends React.Component {
       let newRow = {};
       newRow[this.state.NumberOfRows-1] = {};
       table.push(newRow);
-      this.setState({ table : table });
+      this.setState({ table : table }, () => this.calculate());
     });
   }
 
@@ -99,9 +105,9 @@ class AcctAudit extends React.Component {
             </tr>
           </thead>
         </Table>
-        <div>
-          <Button color="success" onClick={this.addRow} >Add Row</Button>
-        </div>
+        <Col className="text-right" >
+          <Button color="success" onClick={this.addRow} id="addRow" >Add Row</Button>
+        </Col>
         <div>
           <Row style={{ marginTop: '10px', marginBottom: '10px' }} >
             <Col>
@@ -111,7 +117,7 @@ class AcctAudit extends React.Component {
               <Button outline color="secondary" block name="secondaryOptions" onClick={this.showOption} >Secondary Options</Button>
             </Col>  
           </Row>
-          <Button name="" outline color="secondary" block >Export As Excel</Button>
+          <Button name="" outline color="secondary" block onClick={() => console.log(this.state.table)} >Export As Excel</Button>
           <Button name="" outline color="success" block onClick={this.props.goBack} >Go Back</Button>
         </div>
       </div>

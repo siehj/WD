@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'reactstrap';
 import ARTool from './AccountComponents/AgingReportTool.jsx';
 import BillingTool from './AccountComponents/BillingTool.jsx';
 import AccountAuditTool from './AccountComponents/AcctTools.jsx';
+import AccountModal from './AccountComponents/AccountModal.jsx';
 const axios = require('axios');
 
 class Accounts extends React.Component {
@@ -14,10 +15,14 @@ class Accounts extends React.Component {
       agingReportData: [],
       acctsForAudits: [],
       billingAccts: [],
-      date: '' 
+      date: '',
+      modalOpen: false, 
+      table: [] 
     };
     this.changeMiniScreen = this.changeMiniScreen.bind(this);
     this.getGoogleAR = this.getGoogleAR.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.grabTable = this.grabTable.bind(this);
   }
 
   componentDidMount() {
@@ -36,11 +41,20 @@ class Accounts extends React.Component {
 
   }
 
+  openModal() {
+    this.setState({ modalOpen: !this.state.modalOpen });
+  }
+
+  grabTable(theTable) {
+    console.log("hi")
+    this.setState({ table : theTable }, () => this.openModal());
+  }
 
 
   render() {
     return (
       <div>
+        {this.state.modalOpen ? <AccountModal status={this.state.modalOpen} openModal={this.openModal} /> : null }
         <Container>
           <Row className="nav nav-tabs">
             <Col className="text-center" >
@@ -51,7 +65,7 @@ class Accounts extends React.Component {
           </Row>
         </Container>
         <div className="miniMain" >
-          {this.state.miniScreen === 'Audit' ? <AccountAuditTool/> : 
+          {this.state.miniScreen === 'Audit' ? <AccountAuditTool grabTable={this.grabTable} /> : 
           this.state.miniScreen === 'A/R' ? <ARTool getGoogleAR={this.getGoogleAR} /> : <BillingTool/> }
         </div>
       </div>

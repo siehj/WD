@@ -21,7 +21,7 @@ class AccountAuditTool extends React.Component {
     <div style={{ marginTop: '5px' }} >
     {
       this.state.tool === 'calculator' ? <Calculator goBack={this.chooseTool} />
-      : this.state.tool === 'audit' ? <AcctAudit goBack={this.chooseTool} />
+      : this.state.tool === 'audit' ? <AcctAudit goBack={this.chooseTool} grabTable={this.props.grabTable} />
       :
       (
         <div className="text-center" >

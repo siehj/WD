@@ -117,7 +117,7 @@ class AcctAudit extends React.Component {
               <Button outline color="secondary" block name="secondaryOptions" onClick={this.showOption} >Secondary Options</Button>
             </Col>  
           </Row>
-          <Button name="" outline color="secondary" block onClick={() => console.log(this.state.table)} >Export As Excel</Button>
+          <Button name="" outline color="secondary" block onClick={() => this.props.grabTable(this.state.table)} >Export As Excel</Button>
           <Button name="" outline color="success" block onClick={this.props.goBack} >Go Back</Button>
         </div>
       </div>

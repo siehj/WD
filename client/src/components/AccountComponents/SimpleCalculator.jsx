@@ -21,6 +21,7 @@ class Calculator extends React.Component {
     this.calculateTotal = this.calculateTotal.bind(this);
     this.addSecondary = this.addSecondary.bind(this);
     this.changeValue = this.changeValue.bind(this);
+    this.clear = this.clear.bind(this);
   }
 
   calculateWriteOff() {
@@ -60,6 +61,18 @@ class Calculator extends React.Component {
     this.setState({ secondary: !this.state.secondary });
   }
 
+  clear() {
+    this.setState({ SecIns: 0,
+      NewTotal: 0,
+      OF: 0.00, 
+      Allowed: 0, 
+      WO: 0, 
+      Primary: 0, 
+      PP: 0, 
+      Paid: 0,
+      Total: 0 })
+  }
+
   render() {
     return (
       <div>
@@ -78,18 +91,19 @@ class Calculator extends React.Component {
           <tbody>
             <tr>
               <td> <Input type="number" name="OF" placeholder="0.00" onChange={this.changeValue}/> </td>
-              <td> <Input type="number" name="Allowed" placeholder="0.00" onChange={this.changeValue}/> </td>
+              <td> <Input type="number" id="calcAll" name="Allowed" placeholder="0.00" onChange={this.changeValue}/> </td>
               <td name="WO" className="text-center"><h6>{this.state.WO.toFixed(2)}</h6></td>
-              <td> <Input type="number" name="Primary" placeholder="0.00" onChange={this.changeValue}/></td>
+              <td> <Input type="number" id="calcPri" name="Primary" placeholder="0.00" onChange={this.changeValue}/></td>
               <td name="PP" className="text-center"> <h6>{this.state.PP.toFixed(2)}</h6></td>
-              <td> <Input type="number" name="Paid" placeholder="0.00" onChange={this.changeValue}/></td>
+              <td> <Input type="number" id="calcPaid" name="Paid" placeholder="0.00" onChange={this.changeValue}/></td>
               <td name="Total" className="text-center"><h6>{this.state.Total.toFixed(2)}</h6></td>
-              { this.state.secondary ? <td><Input type="number" name="SecIns" placeholder="0.00" onChange={this.changeValue}/></td> : null}
+              { this.state.secondary ? <td><Input type="number" id="calcSec" name="SecIns" placeholder="0.00" onChange={this.changeValue}/></td> : null}
               { this.state.secondary ? <td name="NewTotal"className="text-center"><h6>{this.state.NewTotal.toFixed(2)}</h6></td> : null}
             </tr>
           </tbody>
         </Table>
         <div>
+          <Button color="success" block onClick={this.clear} >Clear</Button>
           <Button name="" outline color="secondary"  block onClick={this.addSecondary}> {this.state.secondary ? "Remove" : "Add" } Secondary Insurance</Button>
           <Button name="" outline color="success"  block onClick={this.props.goBack} >Go Back</Button>
         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Router from './Router.jsx';
-import Chat from './Chat.jsx';
+import DraggableCalc from './AdditionalComponents/DraggableCalc.jsx';
 import TaskModal from './TaskComponents/TaskModal.jsx';
 import ContactModal from './ContactComponents/ContactModal.jsx';
 import { Button, Container, Row, Col, Badge } from 'reactstrap';
@@ -31,11 +31,13 @@ class Dashboard extends React.Component {
       navOpen: true,
       displayTaskModal: false,
       displayContactModal: false,
+      displayCalc: false,
       newMessages: [],
       employees: []
     }
     this.toggleModal = this.toggleModal.bind(this);
     this.submitCloseModal = this.submitCloseModal.bind(this);
+    this.openCalc = this.openCalc.bind(this);
   }
 
   componentDidMount() {
@@ -74,9 +76,14 @@ class Dashboard extends React.Component {
     }
   }
 
+  openCalc() {
+    this.setState({ displayCalc : !this.state.displayCalc });
+  }
+
   render() {
     return (
       <div id="dashboard"  >
+        {this.state.displayCalc === true ? <DraggableCalc/> : null }
         <div className="wrapper" >
           <nav id="sidebar" >
           {this.state.navOpen ?
@@ -120,7 +127,7 @@ class Dashboard extends React.Component {
                   {/* info icon */}
                   <a><img className="icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAORSURBVGhD7ZrNS1RRGMZNK8xNggWtqk0t+tj0sYnINhW5CBd9GQS1Ecmg/AOSCPqAslZGupCijauoICNrEW6LglwkhEhlFlQWCWqUM/3OPQ/drqM2c8+5dzL8wcO5c973PO97ZuY6d+5YMsf/SiaTWYGOovZsNvuYcQh94zjL+BMNoz50G51DOwlVaHlxoZkq1ISemYYLhXWjqBPt5uE82aYHRZdQvAWNBB15AK9edIDD5DdkilCsAQ0H1RMA7x60ViX9g/lS9ED1EoU6Y+i4SvvDPEPoreqkBjVvMCxQG25gthl9ttbpQ+17DOVqJx6YrEeJnQ/5Qg93GMrUVmGw2JwTzm8nPMz7PaOHscHiilrLH9aZv073rUU8WP8G7eCwDC3m+EwQiAnrzZNRqxbzgzUNdnl88Ngiu98wfd1G44HnJ1Qlu5kh0bylnM4L1g/JLgLze5QSGzzaZTczJLZojQtfUc4nNN51NhwfPCbQallODQnm2snLZQc+h2UbwFQpcz026gY+HbKdGhKalOsMXuMMpxk3oV3okY24I+9KtZ0LCc9t6qygXm1HIbDSxmcHPOldaj0KsSM2ZXbARsy5nHsdRqDNpriBzyjD08livo/RK3huUPshTPr6i/JClhEIbbUZ/qBWnexDmBxU3Al8XjFsZFwj6wDmkthIs+xDmAxuFPgCv8grw1QSG7kk+xDFvJHSRq7KPoTJH4p7IaWNtMo+hMkvinshpY2cl30Iky8V90JKGzkh+xAmzddJb6S0kRrZhzB5VnEvpLERWC77EAqbe7HeSHoj+PfLOgqxCoJjNs2dFDZyTda5EOxUnjMpbKRa1rkQrFGeM0luBO8BhlJZ50LQ3AbqDbIdSXgjjbKdHpIOKj8WrB9BD1HkbgeP12n+iVJjwfpBtEi200OueVViX9KzNvJKTIYUp1cG/0Oy+jskm7vv5gt+wbDuNcO+6UT8FGMsWNutFvOHRce0/p+Afj4wLFN7hcHim9amuNDHd4btaqtwWLwQk7uBW5GgvvlFeL9aig9e5RjdsrbpQt1xtFetuINnGYaXkfPvHPlCqfdom1rwC/61mH+0pZKDGt0M8U7sfKGIudHdjiZsWX/g+Q7l/znhAwquQh0o1ufNn+AxgBo5dPvR0wWKV6J6GulCef8kQW4/akPVPJz+ArAY0NB8ZG7O1aFmdFHNtjJ/gfEkMv93kvvNbo7/ipKSXx1HK0yKqpBEAAAAAElFTkSuQmCC"/></a>
                   {/* calculator icon */}                  
-                  <a><img className="icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE7SURBVGhD7dYBasJAEIXh3Efv0+OYg5fYGfr7SDQbN1OKOzAfBOzb3eGtoHYqpZRc7k+I86C3EOdBbyHOg95CnAe9hTgPegvxeOgXxhghDmNMP86FMUaIwxjTj3NhjBHiMMb041wYY4Q4jDF/xzwhzoPeQpwHvYU4D3oLcR70FuI86C3EpZSRLcty4WVTz56PsGI3e77t+SJ64WvsuRGNwQvxbXmn4MslPPM1tvm+3UuwHMaYflbkui7m/G97dAl/3dhzZYuwHMaYcw4Ket5c4/gGW8IYc95B0e7yjm1hjInxYs+F196VH0LrEinKu9QXaJV/GPoSe+UpvJeN9SH2Qq2iR2sc32BLGGP6WZH8P2R2bv493n53PfM1trmZpQ3Wwhhznp2dW+UfVpfYLf9xVi7vv9OllPKPpukHuov4L0ppPIwAAAAASUVORK5CYII="/></a>
+                  <a><img className="icon" onClick={this.openCalc} src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE7SURBVGhD7dYBasJAEIXh3Efv0+OYg5fYGfr7SDQbN1OKOzAfBOzb3eGtoHYqpZRc7k+I86C3EOdBbyHOg95CnAe9hTgPegvxeOgXxhghDmNMP86FMUaIwxjTj3NhjBHiMMb041wYY4Q4jDF/xzwhzoPeQpwHvYU4D3oLcR70FuI86C3EpZSRLcty4WVTz56PsGI3e77t+SJ64WvsuRGNwQvxbXmn4MslPPM1tvm+3UuwHMaYflbkui7m/G97dAl/3dhzZYuwHMaYcw4Ket5c4/gGW8IYc95B0e7yjm1hjInxYs+F196VH0LrEinKu9QXaJV/GPoSe+UpvJeN9SH2Qq2iR2sc32BLGGP6WZH8P2R2bv493n53PfM1trmZpQ3Wwhhznp2dW+UfVpfYLf9xVi7vv9OllPKPpukHuov4L0ppPIwAAAAASUVORK5CYII="/></a>
                 </Col>
               </Row>
               <Row >

@@ -183,3 +183,41 @@ form label {
   cursor: pointer;
 }
 
+#floatingCalc {
+  z-index: 13;
+  position: absolute;
+  width: 250px;
+  height: 270px;
+}
+
+.handle {
+  z-index: 13;
+  cursor: move;
+  height: 35px;
+}
+
+#fcBody {
+  background-color: #fff;
+  height: 86%;
+}
+
+.calcBtnRow {
+  display: inline-block;
+  width: 100%;
+}
+
+.calcBtnRow button {
+  width: 25%;
+  height: 40px;
+}
+
+.lastRow {
+  display: inline-block;
+  width: 100%;
+}
+
+.lastRow button {
+  width: 50%;
+  height: 40px;
+}
+

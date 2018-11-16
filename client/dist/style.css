@@ -193,7 +193,8 @@ form label {
 .handle {
   z-index: 13;
   cursor: move;
-  height: 35px;
+  height: 10px;
+  background-color: green;
 }
 
 #fcBody {

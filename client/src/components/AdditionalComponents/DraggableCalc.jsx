@@ -24,7 +24,7 @@ class DraggableCalc extends React.Component {
         onStop={this.handleStop}>
         <div id="floatingCalc" >
           <div style={{ backgroundColor: 'gray' }}> 
-            <div className="handle">Drag from here</div>
+            <div className="handle"></div>
           </div>
           <div id="fcBody">
             <input type="text" style={{ width: '100%', height: '42px' }} placeholder="0.00" />

@@ -6,6 +6,7 @@ const axios = require('axios');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const cors = require('cors');
+const helmet = require('helmet');
 const http = require('http');
 const socketIo = require('socket.io');
 const sessions = require('express-session');
@@ -16,6 +17,7 @@ const router = require('./routes.js');
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(helmet()); 
 app.use(cors({
   origin: ["http://localhost:3000"],
   methods: ["GET", "POST", "PUT"]

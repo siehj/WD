@@ -27,8 +27,7 @@ class Accounts extends React.Component {
 
   componentDidMount() {
     let today = new Date().toString();
-    console.log(typeof today);
-    this.setState({ date: today }, () => console.log(this.state.date));
+    this.setState({ date: today });
     // this.setState({ miniScreen: this.props.accounts[0]})
   }
 
@@ -46,7 +45,6 @@ class Accounts extends React.Component {
   }
 
   grabTable(theTable) {
-    console.log("hi")
     this.setState({ table : theTable }, () => this.openModal());
   }
 

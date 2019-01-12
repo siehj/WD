@@ -8,57 +8,57 @@ DROP TABLE IF EXISTS employees;
 DROP TABLE IF EXISTS positions;
 
 CREATE TABLE positions (
-  id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  position varchar(100)
+  id serial PRIMARY KEY,
+  position VARCHAR(100)
 );
 
 
 CREATE TABLE employees (
-  id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name varchar(100), 
-  username varchar(100),
-  password varchar(100),
+  id serial PRIMARY KEY,
+  name VARCHAR(100), 
+  username VARCHAR(100),
+  password VARCHAR(100),
   admin_status BOOLEAN,
-  position_id int,
+  position_id INTEGER,
   FOREIGN KEY (position_id) REFERENCES positions(id)
 );
 
 
 CREATE TABLE tasks (
-  id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id serial PRIMARY KEY,
   task text, 
-  note varchar(200), 
+  note VARCHAR(200), 
   completed BOOLEAN,
-  created datetime,
-  deadline datetime,
-  priority int,
-  employee_id int,
+  created timestamp,
+  deadline timestamp,
+  priority INTEGER,
+  employee_id INTEGER,
   FOREIGN KEY (employee_id) REFERENCES employees(id)
 );
 
 
 CREATE TABLE companyType (
-  id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id serial PRIMARY KEY,
   Name text
 );
 
 
 CREATE TABLE contacts (
-  id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name varchar(100), 
-  company varchar(100),
-  phone varchar(12),
-  email varchar(100),
-  type_id int,
+  id serial PRIMARY KEY,
+  name VARCHAR(100), 
+  company VARCHAR(100),
+  phone VARCHAR(12),
+  email VARCHAR(100),
+  type_id INTEGER,
   FOREIGN KEY (type_id) REFERENCES companyType(id)
 );
 
 CREATE TABLE completedTasks (
-  id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id serial PRIMARY KEY,
   task text, 
-  note varchar(200), 
-  completeDate datetime,
-  employee_id int,
+  note VARCHAR(200), 
+  completeDate timestamp,
+  employee_id INTEGER,
   FOREIGN KEY (employee_id) REFERENCES employees(id)
 );
 

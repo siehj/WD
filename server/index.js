@@ -11,6 +11,7 @@ const server = http.createServer(app);
 const io = socketIo(server);
 const db = require('../Database');
 const shapeData = require('../Services/Helpers/ShapeTaskData');
+const router = require('./routes.js');
 
 
 
@@ -18,6 +19,7 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(sessions({ secret: process.env.SECRET, resave: false, saveUninitialized: true }));
+app.use('/', router);
 
 const users = {
 

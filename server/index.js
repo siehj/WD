@@ -8,7 +8,6 @@ const socketIo = require('socket.io');
 const sessions = require('express-session');
 const server = http.createServer(app);
 const io = socketIo(server);
-const shapeData = require('../Services/Helpers/ShapeTaskData');
 const router = require('./routes.js');
 
 app.use(express.static(__dirname + '/../client/dist'));

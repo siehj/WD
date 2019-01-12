@@ -1,4 +1,6 @@
 const mysql = require('mysql');
+const pg = require('pg');
+
 
 const con = mysql.createConnection({
   host : process.env.DBHost,
@@ -15,6 +17,7 @@ con.connect((err) => {
 
   console.log('connected', con.threadId);
 });
+
 
 // CONTACTS -- add, remove, update, get all
 const addContact = (contactInfo, callback) => {

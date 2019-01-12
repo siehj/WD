@@ -1,14 +1,16 @@
 require('dotenv').config();
-const axios = require('axios');
-const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
+
+const axios = require('axios');
+const bodyParser = require('body-parser');
+const compression = require('compression');
+const cors = require('cors');
 const http = require('http');
 const socketIo = require('socket.io');
 const sessions = require('express-session');
 const server = http.createServer(app);
 const io = socketIo(server);
-const cors = require('cors');
 const router = require('./routes.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
@@ -17,7 +19,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({
   origin: ["http://localhost:3000"],
   methods: ["GET", "POST", "PUT"]
-}))
+}));
+app.use(compression());
 app.use(sessions({ secret: process.env.SECRET, resave: false, saveUninitialized: true }));
 app.use('/', router);
 

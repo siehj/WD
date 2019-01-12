@@ -2,14 +2,14 @@ require('dotenv').config();
 const axios = require('axios');
 const bodyParser = require('body-parser');
 const express = require('express');
-var bcrypt = require('bcrypt-nodejs');
-var sessions = require('express-session');
+const bcrypt = require('bcrypt-nodejs');
+const sessions = require('express-session');
 const app = express();
 const http = require('http');
 const socketIo = require('socket.io');
 const server = http.createServer(app);
 const io = socketIo(server);
-const db = require('../Database');
+// const db = require('../Database');
 const shapeData = require('../Services/Helpers/ShapeTaskData');
 const router = require('./routes.js');
 
@@ -20,105 +20,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(sessions({ secret: process.env.SECRET, resave: false, saveUninitialized: true }));
 app.use('/', router);
-
-const users = {
-
-}
-
-app.post('/login', (req, res) => {
-  
-  // temporary function until bcrypt is installed
-  db.verifyEmployee(req.body, (err, result) => {
-    if(err) console.log(err);
-    else result.password === req.body.password ? () => {
-      
-      res.send({ username: req.body.username, admin_status: result.admin_status })
-    } : res.status(500);
-  });
-});
-
-app.get('/api/getEmployees', (req, res) => {
-  db.getAllEmployees((err, employees) => { 
-    if(err) console.error;
-    else {
-      let response = [];
-      employees.map((person) => response.push(person.username));
-      res.send(response);
-    }
-  });
-});
-
-app.post('/api/saveTask', (req, res) => {
-  
-  // console.log(req.body.newTask);
-  let newTask = req.body.newTask;
-
-  db.addTask(newTask, (err, task) => {
-    if (err) console.log(err);
-    else res.end();
-  })
-  
-});
-
-app.get('/api/allUnassigned', (req, res) => {
-  db.getUnassigned((err, unassigned) => {
-    if(err) console.log(err);
-    else {
-
-      let result = shapeData(Object.values(Object.values(unassigned)));
-      res.send(result.unassigned);
-    }
-  })
-})
-
-app.get('/api/getAllTasks', (req, res) => {
-  db.getAllTasks((err, tasks) => {
-    if(err) console.error;
-    else {
-
-      let result = shapeData(Object.values(Object.values(tasks)));
-      res.send(result);
-    };
-  });
-});
-
-app.get('/api/getUserTasks', (req, res) => {
-  db.getAllUserTasks(req.body.username, (err, tasks) => {
-    if(err) console.error;
-    else res.send(tasks);
-  });
-});
-
-app.put('/api/completeTask', (req, res) => {
-
-  db.completeTask(req.body.taskId, (err, result) => {
-    if(err) console.log(err);
-    // else res.end();
-    else {
-      db.removeTask(req.body.taskId, (err, deleteResult) => {
-        if (err) console.log(err);
-        else {
-          res.end();
-        }
-      })
-    }
-  });
-});
-
-app.post('/api/assignTask', (req, res) => {
-  db.assignTask(req.body.taskId, req.body.user, (err, result) => {
-    if(err) console.error;
-    else res.end();
-  });
-});
-
-app.get('/api/allCompleted', (req, res) => {
-  db.getCompletedTasks((err, result) => {
-    if(err) console.log(err);
-    else res.send(result);
-  })
-})
-
 
 
 // CONTACTS

@@ -1,4 +1,4 @@
-const db = require('../../Database/Queries/userQueries.js');
+const db = require('../../Database/Queries/userQueries');
 const bcrypt = require('bcrypt-nodejs');
 const sessions = require('express-session');
 

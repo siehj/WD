@@ -4,7 +4,7 @@ const { Client } = require('pg');
 const client = new Client(process.env.DATABASE_PG + '?ssl=true');
 client.connect(err => err ? console.log(err) : console.log('connected successfully to db!'));
 
-module.exports = { client };
+module.exports = client;
 // const con = mysql.createConnection({
 //   host : process.env.DBHost,
 //   user : process.env.DBUsername, 

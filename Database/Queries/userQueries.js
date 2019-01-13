@@ -15,10 +15,12 @@ module.exports = {
 
   'getAllEmployees' : (callback) => {
     let qs = `SELECT username FROM employees;`;
+
+    // return new Promise ((resolve, reject) => )
     client.query(qs, (err, employees) => {
       if(err) callback(err, null);
       // else callback(null, employees);
-      else console.log(employees)
+      else callback(employees)
     });
   },
 

@@ -1,4 +1,4 @@
-// const db = require('../../Database');
+const db = require('../../Database/Queries/contactQueries');
 
 module.exports = {
 

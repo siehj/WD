@@ -29,9 +29,9 @@ module.exports = {
     db.getAllTasks((err, tasks) => {
       if(err) console.error;
       else {
-  
-        let result = shapeData(Object.values(Object.values(tasks)));
-        res.send(result);
+        console.log(tasks.rows)
+        let result = shapeData(Object.values(Object.values(tasks.rows)));
+        console.log(result);
       };
     });
   },

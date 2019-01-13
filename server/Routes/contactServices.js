@@ -13,7 +13,7 @@ module.exports = {
   'getContacts' : (req, res) => {
     db.getAllContacts((err, contacts) => {
       if(err) console.log(err);
-      else res.send(contacts)
+      else res.send(contacts.rows)
     })
   },
 
